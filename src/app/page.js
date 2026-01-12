@@ -1,232 +1,121 @@
+'use client'
+
+import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { ArrowRight, Sparkles } from 'lucide-react'
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-8">
-      {/* ═══════════════════════════════════════════════════════════════
-          LOGO & BRAND
-          ═══════════════════════════════════════════════════════════════ */}
-      <div className="text-center mb-12">
-        <h1 className="font-poppins text-hero text-primary-400 mb-4">
-          BabyBloom
-        </h1>
-        <p className="text-body text-neutral-400 max-w-md mx-auto">
-          Premium baby products for your little one. Quality, safety, and
-          comfort in every product.
-        </p>
-      </div>
-
-      {/* ═══════════════════════════════════════════════════════════════
-          COLOR PALETTE PREVIEW
-          ═══════════════════════════════════════════════════════════════ */}
-      <div className="bg-white rounded-2xl shadow-card p-8 max-w-3xl w-full mb-8">
-        <h2 className="font-poppins text-section text-neutral-500 mb-6 text-center">
-          Color Palette Preview
-        </h2>
-
-        {/* Primary Colors - Sage Green */}
-        <div className="mb-6">
-          <p className="text-body-sm font-medium text-neutral-400 mb-3">
-            Primary (Sage Green)
-          </p>
-          <div className="flex flex-wrap gap-2">
-            <div className="w-14 h-14 rounded-xl bg-primary-50 shadow-soft"></div>
-            <div className="w-14 h-14 rounded-xl bg-primary-100"></div>
-            <div className="w-14 h-14 rounded-xl bg-primary-200"></div>
-            <div className="w-14 h-14 rounded-xl bg-primary-300"></div>
-            <div className="w-14 h-14 rounded-xl bg-primary-400 shadow-button"></div>
-            <div className="w-14 h-14 rounded-xl bg-primary-500"></div>
-            <div className="w-14 h-14 rounded-xl bg-primary-600"></div>
-            <div className="w-14 h-14 rounded-xl bg-primary-700"></div>
-          </div>
+    <div className="container min-h-screen">
+      {/* Hero Section - Temporary */}
+      <section className="relative py-20 md:py-32 overflow-hidden">
+        {/* Background Decoration */}
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-primary-200 rounded-full blur-3xl opacity-50" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary-200 rounded-full blur-3xl opacity-50" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-200 rounded-full blur-3xl opacity-30" />
         </div>
 
-        {/* Secondary Colors - Soft Blush */}
-        <div className="mb-6">
-          <p className="text-body-sm font-medium text-neutral-400 mb-3">
-            Secondary (Soft Blush)
-          </p>
-          <div className="flex flex-wrap gap-2">
-            <div className="w-14 h-14 rounded-xl bg-secondary-50"></div>
-            <div className="w-14 h-14 rounded-xl bg-secondary-100"></div>
-            <div className="w-14 h-14 rounded-xl bg-secondary-200"></div>
-            <div className="w-14 h-14 rounded-xl bg-secondary-300"></div>
-            <div className="w-14 h-14 rounded-xl bg-secondary-400"></div>
-            <div className="w-14 h-14 rounded-xl bg-secondary-500"></div>
-          </div>
-        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center"
+          >
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-primary-100 text-primary-600 rounded-full text-sm font-medium mb-6"
+            >
+              <Sparkles size={16} />
+              Welcome to BabyBloom
+            </motion.div>
 
-        {/* Accent Colors - Warm Honey */}
-        <div className="mb-6">
-          <p className="text-body-sm font-medium text-neutral-400 mb-3">
-            Accent (Warm Honey)
-          </p>
-          <div className="flex flex-wrap gap-2">
-            <div className="w-14 h-14 rounded-xl bg-accent-50"></div>
-            <div className="w-14 h-14 rounded-xl bg-accent-100"></div>
-            <div className="w-14 h-14 rounded-xl bg-accent-200"></div>
-            <div className="w-14 h-14 rounded-xl bg-accent-300"></div>
-            <div className="w-14 h-14 rounded-xl bg-accent-400"></div>
-          </div>
-        </div>
-
-        {/* Additional Accents */}
-        <div className="mb-8">
-          <p className="text-body-sm font-medium text-neutral-400 mb-3">
-            Additional Accents
-          </p>
-          <div className="flex flex-wrap gap-2">
-            <div
-              className="w-14 h-14 rounded-xl bg-softBlue-200"
-              title="Soft Blue"
-            ></div>
-            <div
-              className="w-14 h-14 rounded-xl bg-lavender-200"
-              title="Lavender"
-            ></div>
-            <div
-              className="w-14 h-14 rounded-xl bg-peach-200"
-              title="Peach"
-            ></div>
-            <div
-              className="w-14 h-14 rounded-xl bg-success"
-              title="Success"
-            ></div>
-            <div
-              className="w-14 h-14 rounded-xl bg-warning"
-              title="Warning"
-            ></div>
-            <div className="w-14 h-14 rounded-xl bg-error" title="Error"></div>
-            <div
-              className="w-14 h-14 rounded-xl bg-rating"
-              title="Rating"
-            ></div>
-          </div>
-        </div>
-
-        {/* Button Examples */}
-        <div className="flex flex-wrap gap-4 justify-center">
-          <button className="btn-primary">Primary Button</button>
-          <button className="btn-secondary">Secondary Button</button>
-          <button className="btn-outline">Outline Button</button>
-        </div>
-      </div>
-
-      {/* ═══════════════════════════════════════════════════════════════
-          TYPOGRAPHY PREVIEW
-          ═══════════════════════════════════════════════════════════════ */}
-      <div className="bg-white rounded-2xl shadow-card p-8 max-w-3xl w-full mb-8">
-        <h2 className="font-poppins text-section text-neutral-500 mb-6 text-center">
-          Typography Preview
-        </h2>
-
-        <div className="space-y-4">
-          <div>
-            <span className="text-tiny text-neutral-300">
-              Hero (48px - Poppins 700)
-            </span>
-            <h1 className="font-poppins text-hero text-neutral-500">
-              Hero Title
+            <h1 className="font-poppins text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-neutral-500 mb-6">
+              Everything Your{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-primary-600">
+                Little One
+              </span>{' '}
+              <br className="hidden sm:block" />
+              Needs to{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary-400 to-secondary-500">
+                Bloom
+              </span>
             </h1>
-          </div>
 
-          <div>
-            <span className="text-tiny text-neutral-300">
-              Section (32px - Poppins 600)
-            </span>
-            <h2 className="font-poppins text-section text-neutral-500">
-              Section Heading
-            </h2>
-          </div>
-
-          <div>
-            <span className="text-tiny text-neutral-300">
-              Card Title (20px - Inter 600)
-            </span>
-            <h3 className="font-inter text-card-title font-semibold text-neutral-500">
-              Product Card Title
-            </h3>
-          </div>
-
-          <div>
-            <span className="text-tiny text-neutral-300">
-              Body (16px - Inter 400)
-            </span>
-            <p className="font-inter text-body text-neutral-400">
-              This is body text using Inter 400. It's comfortable to read and
-              maintains good readability across all devices.
+            <p className="text-lg md:text-xl text-neutral-400 max-w-2xl mx-auto mb-10">
+              Discover premium baby products designed with love. Safe,
+              comfortable, and adorable essentials for your precious bundle of
+              joy.
             </p>
-          </div>
 
-          <div>
-            <span className="text-tiny text-neutral-300">
-              Body Small (14px - Inter 400)
-            </span>
-            <p className="font-inter text-body-sm text-neutral-300">
-              Smaller body text for descriptions, meta information, and
-              secondary content.
-            </p>
-          </div>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link href="/products">
+                <motion.button
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-primary-400 hover:bg-primary-500 text-white font-semibold rounded-full transition-all shadow-lg hover:shadow-xl"
+                >
+                  Shop Now
+                  <ArrowRight size={20} />
+                </motion.button>
+              </Link>
 
-          <div>
-            <span className="text-tiny text-neutral-300">
-              Tiny (12px - Inter 400)
-            </span>
-            <p className="font-inter text-tiny text-neutral-300">
-              Tiny text for labels, timestamps, and badges.
-            </p>
-          </div>
+              <Link href="/categories">
+                <motion.button
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-white/80 backdrop-blur-sm border-2 border-neutral-200 hover:border-primary-300 text-neutral-500 font-semibold rounded-full transition-all"
+                >
+                  Browse Categories
+                </motion.button>
+              </Link>
+            </div>
+          </motion.div>
+
+          {/* Trust Badges */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+            className="mt-16 flex flex-wrap items-center justify-center gap-8 text-neutral-400 text-sm"
+          >
+            <div className="flex items-center gap-2">
+              <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                ✓
+              </div>
+              <span>100% Safe Products</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                🚚
+              </div>
+              <span>Free Shipping</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                ↩️
+              </div>
+              <span>Easy Returns</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center">
+                ⭐
+              </div>
+              <span>5000+ Happy Parents</span>
+            </div>
+          </motion.div>
         </div>
-      </div>
+      </section>
 
-      {/* ═══════════════════════════════════════════════════════════════
-          BADGES PREVIEW
-          ═══════════════════════════════════════════════════════════════ */}
-      <div className="bg-white rounded-2xl shadow-card p-8 max-w-3xl w-full mb-8">
-        <h2 className="font-poppins text-section text-neutral-500 mb-6 text-center">
-          Badges & Status
-        </h2>
-
-        <div className="flex flex-wrap gap-3 justify-center">
-          <span className="badge badge-primary">New Arrival</span>
-          <span className="badge badge-secondary">Best Seller</span>
-          <span className="badge badge-success">In Stock</span>
-          <span className="badge badge-warning">Low Stock</span>
-          <span className="badge badge-error">Out of Stock</span>
-        </div>
-      </div>
-
-      {/* ═══════════════════════════════════════════════════════════════
-          STATUS INDICATOR
-          ═══════════════════════════════════════════════════════════════ */}
-      <div className="flex items-center gap-3 mt-4">
-        <div className="w-3 h-3 rounded-full bg-success animate-pulse"></div>
-        <span className="text-body-sm text-neutral-400">
-          Phase 1: Foundation Complete ✓
-        </span>
-      </div>
-
-      {/* Quick Links for Testing */}
-      <div className="mt-8 flex flex-wrap gap-4 justify-center">
-        <Link
-          href="/products"
-          className="text-body-sm text-primary-400 hover:text-primary-500 underline"
-        >
-          Products Page →
-        </Link>
-        <Link
-          href="/categories"
-          className="text-body-sm text-primary-400 hover:text-primary-500 underline"
-        >
-          Categories Page →
-        </Link>
-        <Link
-          href="/login"
-          className="text-body-sm text-primary-400 hover:text-primary-500 underline"
-        >
-          Login Page →
-        </Link>
-      </div>
+      {/* Placeholder for other sections */}
+      <section className="py-20 bg-white/50 text-center">
+        <p className="text-neutral-400">
+          🚧 More sections coming in Phase 5... 🚧
+        </p>
+      </section>
     </div>
   )
 }

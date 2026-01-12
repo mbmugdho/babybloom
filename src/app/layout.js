@@ -1,6 +1,7 @@
 import { inter, poppins } from './fonts'
 import './globals.css'
 import { Toaster } from 'react-hot-toast'
+import { Navbar, Footer } from '@/components/layout'
 
 export const metadata = {
   title: {
@@ -15,35 +16,30 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <body className="font-inter bg-neutral-50 text-neutral-500 min-h-screen antialiased">
-        
         <Toaster
           position="top-right"
           toastOptions={{
             duration: 4000,
             style: {
-              background: 'rgba(255, 255, 255, 0.9)',
+              background: 'rgba(255, 255, 255, 0.95)',
               backdropFilter: 'blur(10px)',
               border: '1px solid rgba(255, 255, 255, 0.5)',
-              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-              borderRadius: '12px',
+              borderRadius: '16px',
               padding: '16px',
+              boxShadow: '0 10px 40px rgba(0, 0, 0, 0.1)',
             },
             success: {
-              iconTheme: {
-                primary: '#27AE60',
-                secondary: '#fff',
-              },
+              iconTheme: { primary: '#27AE60', secondary: '#fff' },
             },
             error: {
-              iconTheme: {
-                primary: '#E74C3C',
-                secondary: '#fff',
-              },
+              iconTheme: { primary: '#E74C3C', secondary: '#fff' },
             },
           }}
         />
 
+        <Navbar />
         <main className="min-h-screen">{children}</main>
+        <Footer />
       </body>
     </html>
   )
