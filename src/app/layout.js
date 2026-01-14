@@ -15,30 +15,28 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
-      <body className="font-inter bg-neutral-50 text-neutral-500 min-h-screen antialiased">
+      <body className="font-inter text-neutral-500 min-h-screen antialiased">
         <Toaster
+          containerClassName="pointer-events-none mx-2 sm:mx-4"
           position="top-right"
           toastOptions={{
             duration: 4000,
             style: {
               background: 'rgba(255, 255, 255, 0.95)',
               backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(255, 255, 255, 0.5)',
-              borderRadius: '16px',
-              padding: '16px',
-              boxShadow: '0 10px 40px rgba(0, 0, 0, 0.1)',
+              border: '1px solid rgba(0,0,0,0.05)',
+              borderRadius: '12px',
+              padding: '14px 18px',
+              boxShadow: '0 10px 40px rgba(0, 0, 0, 0.08)',
+              fontSize: '14px',
             },
-            success: {
-              iconTheme: { primary: '#27AE60', secondary: '#fff' },
-            },
-            error: {
-              iconTheme: { primary: '#E74C3C', secondary: '#fff' },
-            },
+            success: { iconTheme: { primary: '#27AE60', secondary: '#fff' } },
+            error: { iconTheme: { primary: '#E74C3C', secondary: '#fff' } },
           }}
         />
 
         <Navbar />
-        <main className="min-h-screen">{children}</main>
+        <main>{children}</main>
         <Footer />
       </body>
     </html>

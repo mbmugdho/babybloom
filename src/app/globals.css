@@ -1,27 +1,123 @@
 @import 'tailwindcss';
+@plugin "daisyui";
 
+/* ===================== TAILWIND v4 THEME TOKENS ===================== */
+@theme {
+  /* Primary */
+  --color-primary-50: #f0f7f4;
+  --color-primary-100: #d9ebe2;
+  --color-primary-200: #b5d7c7;
+  --color-primary-300: #8bbda6;
+  --color-primary-400: #7EB09B;
+  --color-primary-500: #6A9C87;
+  --color-primary-600: #5D8A78;
+  --color-primary-700: #4a7162;
+  --color-primary-800: #3d5b50;
+  --color-primary-900: #344c43;
+
+  /* Secondary */
+  --color-secondary-50: #fef5f5;
+  --color-secondary-100: #feeaea;
+  --color-secondary-200: #fcd9d9;
+  --color-secondary-300: #F8C8C8;
+  --color-secondary-400: #F0B0B0;
+  --color-secondary-500: #e89a9a;
+  --color-secondary-600: #d47a7a;
+  --color-secondary-700: #b85c5c;
+  --color-secondary-800: #984d4d;
+  --color-secondary-900: #7e4343;
+
+  /* Accent */
+  --color-accent-50: #fdf9f0;
+  --color-accent-100: #faf0db;
+  --color-accent-200: #f5e0b8;
+  --color-accent-300: #E8C8A0;
+  --color-accent-400: #d4a86e;
+  --color-accent-500: #c4904a;
+  --color-accent-600: #a8743d;
+  --color-accent-700: #8c5a35;
+  --color-accent-800: #734931;
+  --color-accent-900: #5f3d2b;
+
+  /* Neutral */
+  --color-neutral-50: #FAFAF8;
+  --color-neutral-100: #F5F5F0;
+  --color-neutral-200: #DFE6E9;
+  --color-neutral-300: #B2BEC3;
+  --color-neutral-400: #636E72;
+  --color-neutral-500: #2D3436;
+
+  /* Fonts (Tailwind font-inter / font-poppins) */
+  --font-inter: var(--font-inter), system-ui, sans-serif;
+  --font-poppins: var(--font-poppins), system-ui, sans-serif;
+}
+
+/* ===================== OPTIONAL ROOT VARS (NON-TAILWIND USE) ===================== */
 :root {
   --color-primary: #7eb09b;
   --color-primary-hover: #6a9c87;
   --color-secondary: #f8c8c8;
   --color-accent: #e8c8a0;
+  --color-bg: #fafaf8;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* ===================== GLOBAL STYLES ===================== */
+
 
 html {
   scroll-behavior: smooth;
 }
 
 body {
+  background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Container - 1440px max width, centered */
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* ===================== HERO TITLE GRADIENT ANIMATION ===================== */
+@keyframes hero-title-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-hero-title-gradient {
+  background-image: linear-gradient(45deg, #7eb09b, #d4a86e, #6a9c87);
+  background-size: 200% 200%;
+  animation: hero-title-gradient 4s ease-in-out infinite;
+}
+
+/* ===================== SHIMMER ===================== */
 @keyframes shimmer {
   0% {
     background-position: 200% 0;
@@ -32,14 +128,14 @@ body {
 }
 
 .shimmer {
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
 
+/* ===================== SCROLLBAR ===================== */
 ::-webkit-scrollbar {
   width: 8px;
-  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -47,7 +143,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #b2bec3;
+  background: #cbd5e1;
   border-radius: 4px;
 }
 
@@ -55,6 +151,7 @@ body {
   background: #7eb09b;
 }
 
+/* ===================== SELECTION & FOCUS ===================== */
 ::selection {
   background-color: #7eb09b;
   color: white;
