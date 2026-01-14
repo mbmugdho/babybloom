@@ -1,22 +1,21 @@
+import BestSellersSection from "@/components/landing/BestSellersSection";
+import CategoriesSection from "@/components/landing/CategoriesSection";
+import FeaturesSection from "@/components/landing/FeaturesSection";
 import HeroSection from "@/components/landing/HeroSection";
+import NewsletterSection from "@/components/landing/NewsletterSection";
+import TestimonialsSection from "@/components/landing/TestimonialsSection";
+import WhyChooseUsSection from "@/components/landing/WhyChooseUsSection";
 
 export default function Home() {
   return (
     <>
-      {/* Hero Section - Phase 5 */}
       <HeroSection />
-
-      {/* Features Section - Phase 5 */}
-
-      {/* Categories Section - Phase 5 */}
-
-      {/* Best Sellers Section - Phase 5 */}
-
-      {/* Why Choose Us Section - Phase 5 */}
-
-      {/* Testimonials Section - Phase 5 */}
-
-      {/* Newsletter is in Footer */}
+      <FeaturesSection />
+      <CategoriesSection />
+      <BestSellersSection />
+      <WhyChooseUsSection />
+      <TestimonialsSection />
+      <NewsletterSection />
     </>
   )
 }

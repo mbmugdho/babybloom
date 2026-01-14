@@ -2,7 +2,6 @@ export function Shimmer({ className = '' }) {
   return <div className={`shimmer rounded-lg ${className}`} />
 }
 
-// Text Lines Shimmer
 export function ShimmerText({ lines = 1 }) {
   return (
     <div className="space-y-2">
@@ -18,12 +17,10 @@ export function ShimmerText({ lines = 1 }) {
   )
 }
 
-// Image Shimmer
 export function ShimmerImage({ className = '' }) {
   return <div className={`shimmer aspect-square rounded-xl ${className}`} />
 }
 
-// Product Card Shimmer
 export function ShimmerProductCard() {
   return (
     <div className="bg-white rounded-2xl overflow-hidden shadow-soft">

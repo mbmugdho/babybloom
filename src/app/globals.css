@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 @plugin "daisyui";
 
-/* ===================== TAILWIND v4 THEME TOKENS ===================== */
+/*  THEME   */
 @theme {
   /* Primary */
   --color-primary-50: #f0f7f4;
@@ -52,16 +52,16 @@
   --font-poppins: var(--font-poppins), system-ui, sans-serif;
 }
 
-/* ===================== OPTIONAL ROOT VARS (NON-TAILWIND USE) ===================== */
+/*  OPTIONAL ROOT VARS   */
 :root {
   --color-primary: #7eb09b;
   --color-primary-hover: #6a9c87;
   --color-secondary: #f8c8c8;
   --color-accent: #e8c8a0;
-  --color-bg: #fafaf8;
+  --color-bg: #d9ebe2;
 }
 
-/* ===================== GLOBAL STYLES ===================== */
+/*  GLOBAL STYLES  */
 
 
 html {
@@ -98,7 +98,7 @@ body {
   }
 }
 
-/* ===================== HERO TITLE GRADIENT ANIMATION ===================== */
+/*  HERO TITLE GRADIENT ANIMATION */
 @keyframes hero-title-gradient {
   0% {
     background-position: 0% 50%;
@@ -117,7 +117,7 @@ body {
   animation: hero-title-gradient 4s ease-in-out infinite;
 }
 
-/* ===================== SHIMMER ===================== */
+/*  SHIMMER  */
 @keyframes shimmer {
   0% {
     background-position: 200% 0;
@@ -133,7 +133,7 @@ body {
   animation: shimmer 1.5s infinite;
 }
 
-/* ===================== SCROLLBAR ===================== */
+/*  SCROLLBAR  */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -151,7 +151,7 @@ body {
   background: #7eb09b;
 }
 
-/* ===================== SELECTION & FOCUS ===================== */
+/*  SELECTION & FOCUS  */
 ::selection {
   background-color: #7eb09b;
   color: white;

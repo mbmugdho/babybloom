@@ -5,7 +5,8 @@ export const categories = [
     slug: 'diapers-wipes',
     description:
       "Essential hygiene products for your baby's daily comfort. Premium quality diapers and gentle wipes for sensitive skin.",
-    image: '/images/categories/diapers-wipes.jpg',
+    image:
+      'https://ik.imagekit.io/azfnpskmy/categories/Diapers%20&%20Wipes.jpg',
     productCount: 12,
   },
   {
@@ -14,7 +15,8 @@ export const categories = [
     slug: 'skincare-bath',
     description:
       'Gentle skincare and bath products specially formulated for sensitive baby skin. Natural ingredients for ultimate care.',
-    image: '/images/categories/skincare-bath.jpg',
+    image:
+      'https://ik.imagekit.io/azfnpskmy/categories/Skincare%20&%20Bath.jpg',
     productCount: 12,
   },
   {
@@ -23,7 +25,8 @@ export const categories = [
     slug: 'feeding-nursing',
     description:
       'Safe and convenient feeding solutions for babies. From bottles to nursing accessories, everything for feeding time.',
-    image: '/images/categories/feeding-nursing.jpg',
+    image:
+      'https://ik.imagekit.io/azfnpskmy/categories/Feeding%20&%20Nursing.jpg',
     productCount: 12,
   },
   {
@@ -32,7 +35,7 @@ export const categories = [
     slug: 'baby-clothing',
     description:
       'Soft, breathable clothing designed for everyday comfort. Adorable styles that keep your baby cozy and stylish.',
-    image: '/images/categories/baby-clothing.jpg',
+    image: 'https://ik.imagekit.io/azfnpskmy/categories/Baby%20Clothing.jpg',
     productCount: 12,
   },
   {
@@ -41,7 +44,8 @@ export const categories = [
     slug: 'toys-learning',
     description:
       'Fun and educational toys to support early development. Safe, engaging toys that stimulate learning and creativity.',
-    image: '/images/categories/toys-learning.jpg',
+    image:
+      'https://ik.imagekit.io/azfnpskmy/categories/Toys%20&%20Learning.jpg',
     productCount: 12,
   },
   {
@@ -50,7 +54,8 @@ export const categories = [
     slug: 'health-safety',
     description:
       'Trusted products to keep your baby safe and healthy. From monitors to safety gear, peace of mind for parents.',
-    image: '/images/categories/health-safety.jpg',
+    image:
+      'https://ik.imagekit.io/azfnpskmy/categories/Health%20&%20Safety.jpg',
     productCount: 12,
   },
 ]

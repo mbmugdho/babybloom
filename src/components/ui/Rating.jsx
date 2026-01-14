@@ -1,6 +1,5 @@
 import { Star } from 'lucide-react'
 
-// Simple Rating Component - Stars only
 export default function Rating({ value = 0, count = 0, showCount = true }) {
   const fullStars = Math.floor(value)
   const hasHalf = value % 1 >= 0.5

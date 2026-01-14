@@ -38,7 +38,7 @@ export default function HeroSection() {
             {slides.map((slide, index) => (
               <SwiperSlide key={index}>
                 <div className="relative w-full h-[45vh] sm:h-[55vh] md:h-[65vh] lg:h-[75vh]">
-                  {/* Banner Image (Next Image with ImageKit) */}
+                  {/* Banner Image  */}
                   <Image
                     src={slide.image}
                     alt={slide.title}
@@ -47,23 +47,15 @@ export default function HeroSection() {
                     className="object-cover"
                   />
 
-                  {/* Overlay using your palette */}
+                  {/* overlay */}
                   <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-neutral-500/70 via-neutral-500/20 to-transparent" />
 
                   {/* Centered Text + CTA */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-10">
-                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3">
-                      <span
-                        className="
-                          inline-block
-                          bg-clip-text
-                          text-transparent
-                          bg-[length:200%_200%]
-                          animate-hero-title-gradient
-                        "
-                      >
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-10 pt-35">
+                    <h1 className="text-white text-2xl sm:text-3xl md:text-4xl font-bold ">
+                      
                         {slide.title}
-                      </span>
+                      
                     </h1>
 
                     <p className="text-white text-sm sm:text-base md:text-lg mb-5 max-w-xl">
