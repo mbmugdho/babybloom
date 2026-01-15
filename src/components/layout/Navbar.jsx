@@ -2,13 +2,23 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Menu, X, User, ShoppingBag } from 'lucide-react'
+import { Menu, X, User, ShoppingBag, LogOut } from 'lucide-react'
 import { useState } from 'react'
 import Container from './Container'
 import { motion } from 'framer-motion'
+import useAuth from '@/hooks/useAuth'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const { user, isAuthenticated, logout } = useAuth()
+
+  const firstName = user?.name?.split(' ')[0] || 'User'
+  const isAdmin = user?.role === 'admin'
+
+  async function handleLogout() {
+    await logout()
+    setIsOpen(false)
+  }
 
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-neutral-200 shadow-sm">
@@ -46,12 +56,47 @@ export default function Navbar() {
             Cart
           </Link>
 
-          <Link
-            href="/login"
-            className="hover:text-primary-400 flex items-center gap-1 transition"
-          >
-            <User size={16} /> Login
-          </Link>
+          {/* Auth area */}
+          {isAuthenticated ? (
+            <>
+              {isAdmin && (
+                <Link
+                  href="/add-product"
+                  className="hover:text-primary-400 transition"
+                >
+                  Add product
+                </Link>
+              )}
+
+              <span className="text-sm text-neutral-500">
+                Hi, <span className="font-semibold">{firstName}</span>
+              </span>
+
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="flex items-center gap-1 text-sm text-neutral-500 hover:text-secondary-600 transition"
+              >
+                <LogOut size={16} />
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="hover:text-primary-400 flex items-center gap-1 transition"
+              >
+                <User size={16} /> Login
+              </Link>
+              <Link
+                href="/register"
+                className="hover:text-primary-400 transition"
+              >
+                Register
+              </Link>
+            </>
+          )}
         </nav>
 
         {/* Mobile: Cart + Hamburger */}
@@ -152,23 +197,81 @@ export default function Navbar() {
                 Cart
               </Link>
 
-              <Link
-                href="/login"
-                className="
-                  text-center
-                  p-4
-                  bg-[#b5d7c7]
-                  text-neutral-900
-                  rounded-2xl
-                  flex items-center justify-center gap-2
-                  hover:bg-[#d9ebe2]
-                  transition
-                "
-                onClick={() => setIsOpen(false)}
-              >
-                <User size={16} />
-                Login
-              </Link>
+              {isAuthenticated ? (
+                <>
+                  {isAdmin && (
+                    <Link
+                      href="/add-product"
+                      className="
+                        text-center
+                        p-4
+                        bg-[#b5d7c7]
+                        text-neutral-900
+                        rounded-2xl
+                        hover:bg-[#d9ebe2]
+                        transition
+                      "
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Add product
+                    </Link>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="
+                      text-center
+                      p-4
+                      bg-[#b5d7c7]
+                      text-neutral-900
+                      rounded-2xl
+                      flex items-center justify-center gap-2
+                      hover:bg-[#d9ebe2]
+                      transition
+                    "
+                  >
+                    <LogOut size={16} />
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href="/login"
+                    className="
+                      text-center
+                      p-4
+                      bg-[#b5d7c7]
+                      text-neutral-900
+                      rounded-2xl
+                      flex items-center justify-center gap-2
+                      hover:bg-[#d9ebe2]
+                      transition
+                    "
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <User size={16} />
+                    Login
+                  </Link>
+
+                  <Link
+                    href="/register"
+                    className="
+                      text-center
+                      p-4
+                      bg-[#b5d7c7]
+                      text-neutral-900
+                      rounded-2xl
+                      hover:bg-[#d9ebe2]
+                      transition
+                    "
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Register
+                  </Link>
+                </>
+              )}
             </motion.div>
           )}
         </div>

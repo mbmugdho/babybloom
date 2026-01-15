@@ -1,20 +1,16 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import Container from '@/components/layout/Container'
-import useAuth from '@/hooks/useAuth'
-import { Mail, Lock } from 'lucide-react'
+import { Mail, Lock, User as UserIcon } from 'lucide-react'
+import toast from 'react-hot-toast'
 import Link from 'next/link'
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const callbackUrl = searchParams.get('callback') || '/checkout' // default after login from cart/checkout
-  const prefillEmail = searchParams.get('email') || ''
-
-  const { login, isAuthenticated } = useAuth()
-  const [email, setEmail] = useState(prefillEmail)
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [submitting, setSubmitting] = useState(false)
 
@@ -22,19 +18,28 @@ export default function LoginPage() {
     e.preventDefault()
     setSubmitting(true)
 
-    const result = await login(email.trim(), password)
+    try {
+      const res = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password }),
+      })
 
-    setSubmitting(false)
+      const data = await res.json()
 
-    if (result.success) {
-      router.push(callbackUrl || '/')
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || 'Registration failed')
+      }
+
+      toast.success('Registration successful. Please log in.')
+      router.push(
+        `/login?email=${encodeURIComponent(email)}&callback=/checkout`
+      )
+    } catch (err) {
+      toast.error(err.message || 'Registration failed')
+    } finally {
+      setSubmitting(false)
     }
-  }
-
-  if (isAuthenticated) {
-    // Already logged in, redirect to callback
-    router.push(callbackUrl || '/')
-    return null
   }
 
   return (
@@ -60,18 +65,52 @@ export default function LoginPage() {
           <div className="relative z-10 space-y-5">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-500 mb-2">
-                Welcome back
+                Create your account
               </p>
               <h1 className="font-poppins text-2xl sm:text-3xl font-bold text-neutral-700 mb-2">
-                Log in to BabyBloom
+                Join BabyBloom
               </h1>
               <p className="text-sm text-neutral-400">
-                Sign in to continue your order, manage your details, or access
-                your admin tools.
+                Save your details to make future orders faster and simpler.
               </p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+              {/* Name */}
+              <div className="space-y-1.5">
+                <label
+                  htmlFor="name"
+                  className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-neutral-400"
+                >
+                  <UserIcon size={14} className="text-primary-500" />
+                  Name
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  autoComplete="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="
+                    w-full rounded-full border
+                    bg-white/80
+                    px-4 py-2.5
+                    text-sm
+                    text-neutral-600
+                    placeholder:text-neutral-300
+                    border-neutral-200
+                    shadow-soft
+                    focus-visible:outline-none
+                    focus-visible:ring-2
+                    focus-visible:ring-primary-400/70
+                    focus-visible:border-primary-300
+                    transition
+                  "
+                  placeholder="Your full name"
+                  required
+                />
+              </div>
+
               {/* Email */}
               <div className="space-y-1.5">
                 <label
@@ -119,7 +158,7 @@ export default function LoginPage() {
                 <input
                   id="password"
                   type="password"
-                  autoComplete="current-password"
+                  autoComplete="new-password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="
@@ -137,7 +176,7 @@ export default function LoginPage() {
                     focus-visible:border-primary-300
                     transition
                   "
-                  placeholder="*******"
+                  placeholder="Create a password"
                   required
                 />
               </div>
@@ -159,19 +198,19 @@ export default function LoginPage() {
                   transition
                 "
               >
-                {submitting ? 'Logging in…' : 'Log in'}
+                {submitting ? 'Creating account…' : 'Create account'}
               </button>
             </form>
 
             <p className="text-[11px] text-neutral-400">
-              New here?{' '}
+              Already have an account?{' '}
               <Link
-                href="/register"
+                href="/login"
                 className="font-semibold text-primary-600 hover:text-primary-700"
               >
-                Create an account
-              </Link>{' '}
-              to complete your order.
+                Log in
+              </Link>
+              .
             </p>
           </div>
         </div>
