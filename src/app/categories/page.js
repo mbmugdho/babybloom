@@ -1,9 +1,13 @@
-// src/app/categories/page.js
-
 import Container from '@/components/layout/Container'
 import CategoryGrid from '@/components/categories/CategoryGrid'
 import connectDB from '@/lib/mongodb'
 import Category from '@/models/Category'
+
+export const metadata = {
+  title: 'Shop by Category | BabyBloom',
+  description:
+    'Explore baby essentials by category – Diapers & Wipes, Skincare & Bath, Feeding & Nursing, Baby Clothing, Toys & Learning, and Health & Safety.',
+}
 
 export const dynamic = 'force-dynamic'
 

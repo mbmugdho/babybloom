@@ -1,6 +1,10 @@
-// src/app/checkout/page.js
-
 import Container from '@/components/layout/Container'
+
+export const metadata = {
+  title: 'Checkout | BabyBloom',
+  description:
+    'Complete your BabyBloom order with your delivery details. Secure checkout for curated baby essentials in Bangladesh.',
+}
 
 export default function CheckoutPage() {
   return (

@@ -7,6 +7,8 @@ import { Mail, Lock, User as UserIcon } from 'lucide-react'
 import toast from 'react-hot-toast'
 import Link from 'next/link'
 
+
+
 export default function RegisterPage() {
   const router = useRouter()
   const [name, setName] = useState('')

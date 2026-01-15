@@ -8,6 +8,12 @@ import connectDB from '@/lib/mongodb'
 import Product from '@/models/Product'
 import Category from '@/models/Category'
 
+export const metadata = {
+  title: 'All Baby Products | BabyBloom',
+  description:
+    'Browse all BabyBloom products in one place – diapers, wipes, skincare, bath, feeding, baby clothing, toys, and safety essentials for little ones in Bangladesh.',
+}
+
 export const dynamic = 'force-dynamic'
 
 const PAGE_SIZE = 12
@@ -67,7 +73,9 @@ function getParam(value, fallback = '') {
   return value ?? fallback
 }
 
-export default async function ProductsPage({ searchParams: searchParamsPromise }) {
+export default async function ProductsPage({
+  searchParams: searchParamsPromise,
+}) {
   // NEW: unwrap async searchParams
   const searchParams = await searchParamsPromise
 

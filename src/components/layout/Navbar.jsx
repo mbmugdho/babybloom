@@ -2,7 +2,14 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Menu, X, User, ShoppingBag, LogOut } from 'lucide-react'
+import {
+  Menu,
+  X,
+  User,
+  ShoppingBag,
+  LogOut,
+  LayoutDashboard,
+} from 'lucide-react'
 import { useState } from 'react'
 import Container from './Container'
 import { motion } from 'framer-motion'
@@ -56,16 +63,24 @@ export default function Navbar() {
             Cart
           </Link>
 
-          {/* Auth area */}
           {isAuthenticated ? (
             <>
               {isAdmin && (
-                <Link
-                  href="/add-product"
-                  className="hover:text-primary-400 transition"
-                >
-                  Add product
-                </Link>
+                <>
+                  <Link
+                    href="/admin"
+                    className="hover:text-primary-400 flex items-center gap-1 transition"
+                  >
+                    <LayoutDashboard size={16} />
+                    Dashboard
+                  </Link>
+                  <Link
+                    href="/add-product"
+                    className="hover:text-primary-400 transition"
+                  >
+                    Add product
+                  </Link>
+                </>
               )}
 
               <span className="text-sm text-neutral-500">
@@ -200,21 +215,40 @@ export default function Navbar() {
               {isAuthenticated ? (
                 <>
                   {isAdmin && (
-                    <Link
-                      href="/add-product"
-                      className="
-                        text-center
-                        p-4
-                        bg-[#b5d7c7]
-                        text-neutral-900
-                        rounded-2xl
-                        hover:bg-[#d9ebe2]
-                        transition
-                      "
-                      onClick={() => setIsOpen(false)}
-                    >
-                      Add product
-                    </Link>
+                    <>
+                      <Link
+                        href="/admin"
+                        className="
+                          text-center
+                          p-4
+                          bg-[#b5d7c7]
+                          text-neutral-900
+                          rounded-2xl
+                          flex items-center justify-center gap-2
+                          hover:bg-[#d9ebe2]
+                          transition
+                        "
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <LayoutDashboard size={16} />
+                        Dashboard
+                      </Link>
+                      <Link
+                        href="/add-product"
+                        className="
+                          text-center
+                          p-4
+                          bg-[#b5d7c7]
+                          text-neutral-900
+                          rounded-2xl
+                          hover:bg-[#d9ebe2]
+                          transition
+                        "
+                        onClick={() => setIsOpen(false)}
+                      >
+                        Add product
+                      </Link>
+                    </>
                   )}
 
                   <button

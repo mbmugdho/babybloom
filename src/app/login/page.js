@@ -1,22 +1,38 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Container from '@/components/layout/Container'
 import useAuth from '@/hooks/useAuth'
 import { Mail, Lock } from 'lucide-react'
-import Link from 'next/link'
 
 export default function LoginPage() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const callbackUrl = searchParams.get('callback') || '/checkout' // default after login from cart/checkout
+
+  const callbackUrl = useMemo(
+    () => searchParams.get('callback') || '',
+    [searchParams]
+  )
   const prefillEmail = searchParams.get('email') || ''
 
-  const { login, isAuthenticated } = useAuth()
+  const { login, isAuthenticated, user } = useAuth()
   const [email, setEmail] = useState(prefillEmail)
   const [password, setPassword] = useState('')
   const [submitting, setSubmitting] = useState(false)
+
+  // Redirect if already logged in
+  useEffect(() => {
+    if (!isAuthenticated || !user) return
+
+    if (callbackUrl) {
+      router.replace(callbackUrl)
+    } else if (user.role === 'admin') {
+      router.replace('/admin')
+    } else {
+      router.replace('/checkout')
+    }
+  }, [isAuthenticated, user, callbackUrl, router])
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -27,13 +43,24 @@ export default function LoginPage() {
     setSubmitting(false)
 
     if (result.success) {
-      router.push(callbackUrl || '/')
+      const loggedInUser = result.user || user
+
+      if (callbackUrl) {
+        router.replace(callbackUrl)
+      } else if (loggedInUser?.role === 'admin') {
+        router.replace('/admin')
+      } else {
+        router.replace('/checkout')
+      }
     }
   }
 
-  if (isAuthenticated) {
-    // Already logged in, redirect to callback
-    router.push(callbackUrl || '/')
+  function fillDemoAdmin() {
+    setEmail('admin@babybloom.com')
+    setPassword('BabyBloom@2024')
+  }
+
+  if (isAuthenticated && user) {
     return null
   }
 
@@ -137,7 +164,7 @@ export default function LoginPage() {
                     focus-visible:border-primary-300
                     transition
                   "
-                  placeholder="*******"
+                  placeholder="••••••••"
                   required
                 />
               </div>
@@ -165,14 +192,50 @@ export default function LoginPage() {
 
             <p className="text-[11px] text-neutral-400">
               New here?{' '}
-              <Link
+              <a
                 href="/register"
                 className="font-semibold text-primary-600 hover:text-primary-700"
               >
                 Create an account
-              </Link>{' '}
+              </a>{' '}
               to complete your order.
             </p>
+
+            {/* Demo admin section */}
+            <div className="mt-3 rounded-2xl bg-neutral-50/80 border border-neutral-200/80 px-3 py-3 text-[11px] text-neutral-500 shadow-soft">
+              <div className="flex flex-col gap-1.5">
+                <span className="font-semibold text-neutral-600">
+                  Demo for admin dashboard
+                </span>
+                <p>
+                  Use the demo admin account to explore the BabyBloom admin
+                  dashboard.
+                </p>
+                <p className="text-[10px] text-neutral-400">
+                  Email: <span className="font-mono">admin@babybloom.com</span>{' '}
+                  <br />
+                  Password: <span className="font-mono">BabyBloom@2024</span>
+                </p>
+                <button
+                  type="button"
+                  onClick={fillDemoAdmin}
+                  className="
+                    mt-1 inline-flex items-center justify-center
+                    rounded-full
+                    px-3 py-1.5
+                    text-[11px] font-semibold
+                    text-primary-600
+                    bg-primary-50/80
+                    border border-primary-100
+                    shadow-soft
+                    hover:bg-primary-100
+                    transition
+                  "
+                >
+                  Fill demo admin credentials
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </Container>

@@ -1,10 +1,30 @@
-// src/app/products/[id]/page.js
-
 import Container from '@/components/layout/Container'
 import ProductDetails from '@/components/products/ProductDetails'
 import connectDB from '@/lib/mongodb'
 import Product from '@/models/Product'
 import { notFound } from 'next/navigation'
+
+export async function generateMetadata({ params: paramsPromise }) {
+  const params = await paramsPromise
+  const { id } = params
+
+  const product = await getProduct(id)
+
+  if (!product) {
+    return {
+      title: 'Product not found | BabyBloom',
+      description:
+        'This baby product could not be found. Explore our curated collection of gentle essentials instead.',
+    }
+  }
+
+  return {
+    title: `${product.name} | BabyBloom`,
+    description:
+      product.shortDescription ||
+      `Discover ${product.name} from ${product.brand} at BabyBloom. Gentle, curated baby care products for families in Bangladesh.`,
+  }
+}
 
 async function getProduct(id) {
   if (!id || typeof id !== 'string') return null

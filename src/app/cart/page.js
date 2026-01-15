@@ -5,14 +5,10 @@ import { useRouter } from 'next/navigation'
 import Container from '@/components/layout/Container'
 import Image from 'next/image'
 import Link from 'next/link'
-import {
-  Trash2,
-  Plus,
-  Minus,
-  ShoppingCart,
-  ArrowLeft,
-} from 'lucide-react'
+import { Trash2, Plus, Minus, ShoppingCart, ArrowLeft } from 'lucide-react'
 import toast from 'react-hot-toast'
+
+
 
 const CART_KEY = 'babybloom_cart'
 

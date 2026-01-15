@@ -1,5 +1,3 @@
-// src/app/categories/[slug]/page.js
-
 import Container from '@/components/layout/Container'
 import ProductGrid from '@/components/products/ProductGrid'
 import connectDB from '@/lib/mongodb'
@@ -7,6 +5,30 @@ import Category from '@/models/Category'
 import Product from '@/models/Product'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+
+export async function generateMetadata({ params: paramsPromise }) {
+  const params = await paramsPromise
+  const { slug } = params
+
+  const result = await getCategoryAndProducts(slug)
+
+  if (!result) {
+    return {
+      title: 'Category not found | BabyBloom',
+      description:
+        'This category does not exist. Browse all our curated baby product categories at BabyBloom.',
+    }
+  }
+
+  const { category } = result
+
+  return {
+    title: `${category.name} | BabyBloom`,
+    description:
+      category.description ||
+      `Discover ${category.name} products at BabyBloom – gentle, curated baby essentials for families in Bangladesh.`,
+  }
+}
 
 export const dynamic = 'force-dynamic'
 

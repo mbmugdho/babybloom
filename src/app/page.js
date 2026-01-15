@@ -1,10 +1,16 @@
-import BestSellersSection from "@/components/landing/BestSellersSection";
-import CategoriesSection from "@/components/landing/CategoriesSection";
-import FeaturesSection from "@/components/landing/FeaturesSection";
-import HeroSection from "@/components/landing/HeroSection";
-import NewsletterSection from "@/components/landing/NewsletterSection";
-import TestimonialsSection from "@/components/landing/TestimonialsSection";
-import WhyChooseUsSection from "@/components/landing/WhyChooseUsSection";
+import BestSellersSection from '@/components/landing/BestSellersSection'
+import CategoriesSection from '@/components/landing/CategoriesSection'
+import FeaturesSection from '@/components/landing/FeaturesSection'
+import HeroSection from '@/components/landing/HeroSection'
+import NewsletterSection from '@/components/landing/NewsletterSection'
+import TestimonialsSection from '@/components/landing/TestimonialsSection'
+import WhyChooseUsSection from '@/components/landing/WhyChooseUsSection'
+
+export const metadata = {
+  title: 'BabyBloom | Gentle Baby Essentials for Modern Parents',
+  description:
+    'Shop curated baby products in Bangladesh – from diapers and wipes to skincare, feeding, clothing, toys, and safety essentials. Thoughtfully selected for gentle, everyday care.',
+}
 
 export default function Home() {
   return (
