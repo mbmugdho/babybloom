@@ -14,17 +14,24 @@ import { useState } from 'react'
 import Container from './Container'
 import { motion } from 'framer-motion'
 import useAuth from '@/hooks/useAuth'
+import { usePathname, useRouter } from 'next/navigation'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const { user, isAuthenticated, logout } = useAuth()
+  const pathname = usePathname()
+  const router = useRouter()
 
   const firstName = user?.name?.split(' ')[0] || 'User'
   const isAdmin = user?.role === 'admin'
 
+  const isActive = (href) =>
+    pathname === href || pathname.startsWith(href + '/')
+
   async function handleLogout() {
     await logout()
     setIsOpen(false)
+    router.push('/')
   }
 
   return (
@@ -44,53 +51,97 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-          <Link href="/products" className="hover:text-primary-400 transition">
+        <nav className="hidden md:flex items-center gap-3 text-sm font-medium">
+          <Link
+            href="/products"
+            className={`
+              flex items-center gap-1
+              px-3 py-1 rounded-full
+              transition
+              ${
+                isActive('/products')
+                  ? 'bg-primary-100 text-primary-700 shadow-soft'
+                  : 'text-neutral-600 hover:bg-primary-50 hover:text-primary-700'
+              }
+            `}
+          >
             Products
           </Link>
+
           <Link
             href="/categories"
-            className="hover:text-primary-400 transition"
+            className={`
+              flex items-center gap-1
+              px-3 py-1 rounded-full
+              transition
+              ${
+                isActive('/categories')
+                  ? 'bg-primary-100 text-primary-700 shadow-soft'
+                  : 'text-neutral-600 hover:bg-primary-50 hover:text-primary-700'
+              }
+            `}
           >
             Categories
           </Link>
 
-          <Link
-            href="/cart"
-            className="hover:text-primary-400 flex items-center gap-1 transition"
-          >
-            <ShoppingBag size={16} />
-            Cart
-          </Link>
+          {!isAdmin && (
+            <Link
+              href="/cart"
+              className={`
+      flex items-center gap-1
+      px-3 py-1 rounded-full
+      transition
+      ${
+        isActive('/cart')
+          ? 'bg-primary-100 text-primary-700 shadow-soft'
+          : 'text-neutral-600 hover:bg-primary-50 hover:text-primary-700'
+      }
+    `}
+            >
+              <ShoppingBag size={16} />
+              Cart
+            </Link>
+          )}
 
           {isAuthenticated ? (
             <>
               {isAdmin && (
-                <>
-                  <Link
-                    href="/admin"
-                    className="hover:text-primary-400 flex items-center gap-1 transition"
-                  >
-                    <LayoutDashboard size={16} />
-                    Dashboard
-                  </Link>
-                  <Link
-                    href="/add-product"
-                    className="hover:text-primary-400 transition"
-                  >
-                    Add product
-                  </Link>
-                </>
+                <Link
+                  href="/admin"
+                  className={`
+                    flex items-center gap-1
+                    px-3 py-1 rounded-full
+                    transition
+                    ${
+                      isActive('/admin')
+                        ? 'bg-primary-100 text-primary-700 shadow-soft'
+                        : 'text-neutral-600 hover:bg-primary-50 hover:text-primary-700'
+                    }
+                  `}
+                >
+                  <LayoutDashboard size={16} />
+                  Dashboard
+                </Link>
               )}
 
-              <span className="text-sm text-neutral-500">
+              <span className="mx-1 text-sm text-neutral-500">
                 Hi, <span className="font-semibold">{firstName}</span>
               </span>
 
               <button
                 type="button"
                 onClick={handleLogout}
-                className="flex items-center gap-1 text-sm text-neutral-500 hover:text-secondary-600 transition"
+                className="
+                  flex items-center gap-1
+                  px-3 py-1 rounded-full
+                  text-sm
+                  text-neutral-600
+                  border border-neutral-200
+                  bg-white/80
+                  shadow-soft
+                  hover:bg-neutral-50
+                  transition
+                "
               >
                 <LogOut size={16} />
                 Logout
@@ -100,13 +151,32 @@ export default function Navbar() {
             <>
               <Link
                 href="/login"
-                className="hover:text-primary-400 flex items-center gap-1 transition"
+                className={`
+                  flex items-center gap-1
+                  px-3 py-1 rounded-full
+                  transition
+                  ${
+                    isActive('/login')
+                      ? 'bg-primary-100 text-primary-700 shadow-soft'
+                      : 'text-neutral-600 hover:bg-primary-50 hover:text-primary-700'
+                  }
+                `}
               >
                 <User size={16} /> Login
               </Link>
+
               <Link
                 href="/register"
-                className="hover:text-primary-400 transition"
+                className={`
+                  flex items-center gap-1
+                  px-3 py-1 rounded-full
+                  transition
+                  ${
+                    isActive('/register')
+                      ? 'bg-primary-100 text-primary-700 shadow-soft'
+                      : 'text-neutral-600 hover:bg-primary-50 hover:text-primary-700'
+                  }
+                `}
               >
                 Register
               </Link>
@@ -117,10 +187,11 @@ export default function Navbar() {
         {/* Mobile: Cart + Hamburger */}
         <div className="md:hidden relative flex items-center gap-2">
           {/* Cart icon (mobile) */}
-          <Link
-            href="/cart"
-            aria-label="Cart"
-            className="
+          {!isAdmin && (
+            <Link
+              href="/cart"
+              aria-label="Cart"
+              className={`
               inline-flex items-center justify-center
               rounded-full
               border border-primary-100
@@ -128,10 +199,12 @@ export default function Navbar() {
               p-1.5
               text-primary-600
               shadow-soft
-            "
-          >
-            <ShoppingBag size={18} />
-          </Link>
+              ${isActive('/cart') ? 'ring-2 ring-primary-300' : ''}
+            `}
+            >
+              <ShoppingBag size={18} />
+            </Link>
+          )}
 
           {/* Hamburger */}
           <button
@@ -152,7 +225,7 @@ export default function Navbar() {
               className="
                 absolute right-0 top-16
                 w-42
-                bg-[#6A9C87]
+                bg-[#6A9C87]/70
                 rounded-2xl
                 shadow-lg
                 p-2
@@ -164,15 +237,16 @@ export default function Navbar() {
             >
               <Link
                 href="/products"
-                className="
+                className={`
                   text-center
-                  p-4
+                  p-2
+                  rounded-2xl
                   bg-[#b5d7c7]
                   text-neutral-900
-                  rounded-2xl
                   hover:bg-[#d9ebe2]
                   transition
-                "
+                  ${isActive('/products') ? 'ring-2 ring-primary-200' : ''}
+                `}
                 onClick={() => setIsOpen(false)}
               >
                 Products
@@ -180,75 +254,44 @@ export default function Navbar() {
 
               <Link
                 href="/categories"
-                className="
+                className={`
                   text-center
-                  p-4
+                  p-2
+                  rounded-2xl
                   bg-[#b5d7c7]
                   text-neutral-900
-                  rounded-2xl
                   hover:bg-[#d9ebe2]
                   transition
-                "
+                  ${isActive('/categories') ? 'ring-2 ring-primary-200' : ''}
+                `}
                 onClick={() => setIsOpen(false)}
               >
                 Categories
               </Link>
 
-              <Link
-                href="/cart"
-                className="
-                  text-center
-                  p-4
-                  bg-[#b5d7c7]
-                  text-neutral-900
-                  rounded-2xl
-                  flex items-center justify-center gap-2
-                  hover:bg-[#d9ebe2]
-                  transition
-                "
-                onClick={() => setIsOpen(false)}
-              >
-                <ShoppingBag size={16} />
-                Cart
-              </Link>
+              
 
               {isAuthenticated ? (
                 <>
                   {isAdmin && (
-                    <>
-                      <Link
-                        href="/admin"
-                        className="
-                          text-center
-                          p-4
-                          bg-[#b5d7c7]
-                          text-neutral-900
-                          rounded-2xl
-                          flex items-center justify-center gap-2
-                          hover:bg-[#d9ebe2]
-                          transition
-                        "
-                        onClick={() => setIsOpen(false)}
-                      >
-                        <LayoutDashboard size={16} />
-                        Dashboard
-                      </Link>
-                      <Link
-                        href="/add-product"
-                        className="
-                          text-center
-                          p-4
-                          bg-[#b5d7c7]
-                          text-neutral-900
-                          rounded-2xl
-                          hover:bg-[#d9ebe2]
-                          transition
-                        "
-                        onClick={() => setIsOpen(false)}
-                      >
-                        Add product
-                      </Link>
-                    </>
+                    <Link
+                      href="/admin"
+                      className={`
+                        text-center
+                        p-2
+                        rounded-2xl
+                        bg-[#b5d7c7]
+                        text-neutral-900
+                        flex items-center justify-center gap-2
+                        hover:bg-[#d9ebe2]
+                        transition
+                        ${isActive('/admin') ? 'ring-2 ring-primary-200' : ''}
+                      `}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <LayoutDashboard size={16} />
+                      Dashboard
+                    </Link>
                   )}
 
                   <button
@@ -256,7 +299,7 @@ export default function Navbar() {
                     onClick={handleLogout}
                     className="
                       text-center
-                      p-4
+                      p-2
                       bg-[#b5d7c7]
                       text-neutral-900
                       rounded-2xl
@@ -273,16 +316,17 @@ export default function Navbar() {
                 <>
                   <Link
                     href="/login"
-                    className="
+                    className={`
                       text-center
-                      p-4
+                      p-2
+                      rounded-2xl
                       bg-[#b5d7c7]
                       text-neutral-900
-                      rounded-2xl
                       flex items-center justify-center gap-2
                       hover:bg-[#d9ebe2]
                       transition
-                    "
+                      ${isActive('/login') ? 'ring-2 ring-primary-200' : ''}
+                    `}
                     onClick={() => setIsOpen(false)}
                   >
                     <User size={16} />
@@ -291,15 +335,16 @@ export default function Navbar() {
 
                   <Link
                     href="/register"
-                    className="
+                    className={`
                       text-center
-                      p-4
+                      p-2
+                      rounded-2xl
                       bg-[#b5d7c7]
                       text-neutral-900
-                      rounded-2xl
                       hover:bg-[#d9ebe2]
                       transition
-                    "
+                      ${isActive('/register') ? 'ring-2 ring-primary-200' : ''}
+                    `}
                     onClick={() => setIsOpen(false)}
                   >
                     Register
