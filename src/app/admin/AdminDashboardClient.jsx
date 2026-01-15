@@ -1,7 +1,14 @@
 'use client'
 
 import Link from 'next/link'
-import { Package, Layers, Users, Star, PlusCircle } from 'lucide-react'
+import {
+  Package,
+  Layers,
+  Users,
+  Star,
+  PlusCircle,
+  ArrowRight,
+} from 'lucide-react'
 import {
   BarChart,
   Bar,
@@ -16,10 +23,36 @@ import {
 
 const FLAG_COLORS = ['#7EB09B', '#F8C8C8', '#E8C8A0']
 const ROLE_COLORS = ['#7EB09B', '#B2BEC3']
+const REVENUE_COLORS = ['#7EB09B', '#F8C8C8'] // Net vs Discount
+
+function formatBDT(amount) {
+  if (!amount || typeof amount !== 'number') return '৳0'
+  return `৳${amount.toLocaleString('en-BD', {
+    maximumFractionDigits: 0,
+  })}`
+}
 
 export default function AdminDashboardClient({ data }) {
-  const { stats, productsPerCategory, flagDistribution, roleDistribution } =
-    data
+  const {
+    stats,
+    productsPerCategoryTop,
+    productsPerCategoryAll,
+    flagDistribution,
+    roleDistribution,
+  } = data
+
+  const revenueData = [
+    {
+      name: 'Potential',
+      net: stats.potentialNet,
+      discount: stats.potentialDiscountValue,
+    },
+  ]
+
+  const discountShare =
+    stats.potentialGross > 0
+      ? (stats.potentialDiscountValue / stats.potentialGross) * 100
+      : 0
 
   return (
     <div
@@ -50,8 +83,8 @@ export default function AdminDashboardClient({ data }) {
               BabyBloom cockpit
             </h1>
             <p className="text-sm text-neutral-400 mt-1 max-w-xl">
-              A quick overview of your curated products, categories, and user
-              base. Use the shortcuts and charts to keep an eye on your store.
+              A quick overview of your curated products, categories, user base
+              and potential revenue. Use this cockpit to steer your store.
             </p>
           </div>
 
@@ -121,9 +154,125 @@ export default function AdminDashboardClient({ data }) {
           />
         </div>
 
-        {/* Charts row */}
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
-          {/* Products per category (bar chart) */}
+        {/* Revenue cockpit row */}
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1.1fr)]">
+          {/* Revenue overview */}
+          <div
+            className="
+              rounded-2xl
+              bg-gradient-to-r from-primary-50 via-accent-50 to-secondary-50
+              border border-primary-100/80
+              shadow-soft
+              backdrop-blur-md
+              p-4 sm:p-5
+              flex flex-col gap-4
+            "
+          >
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary-500 mb-1">
+                  Revenue cockpit
+                </p>
+                <p className="font-poppins text-sm font-semibold text-neutral-700">
+                  Potential store value (based on current stock)
+                </p>
+              </div>
+              <div className="text-right">
+                <p className="text-[11px] text-neutral-400">Potential net</p>
+                <p className="font-poppins text-lg font-semibold text-primary-600">
+                  {formatBDT(stats.potentialNet)}
+                </p>
+              </div>
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-3">
+              <div>
+                <p className="text-[11px] text-neutral-400 mb-0.5">
+                  Gross list value
+                </p>
+                <p className="font-poppins text-sm font-semibold text-neutral-700">
+                  {formatBDT(stats.potentialGross)}
+                </p>
+              </div>
+              <div>
+                <p className="text-[11px] text-neutral-400 mb-0.5">
+                  Discount value
+                </p>
+                <p className="font-poppins text-sm font-semibold text-secondary-700">
+                  {formatBDT(stats.potentialDiscountValue)}
+                </p>
+                <p className="text-[10px] text-neutral-400">
+                  {discountShare.toFixed(1)}% of list value
+                </p>
+              </div>
+              <div>
+                <p className="text-[11px] text-neutral-400 mb-0.5">
+                  Avg. discount %
+                </p>
+                <p className="font-poppins text-sm font-semibold text-accent-700">
+                  {stats.avgDiscount.toFixed(1)}%
+                </p>
+              </div>
+            </div>
+
+            {/* Compact stacked bar chart */}
+            <div className="h-20">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                  data={revenueData}
+                  layout="vertical"
+                  margin={{ top: 5, right: 10, left: 10, bottom: 0 }}
+                  stackOffset="none"
+                >
+                  <XAxis type="number" hide />
+                  <YAxis type="category" dataKey="name" hide />
+                  <Tooltip
+                    formatter={(value, name) => [
+                      formatBDT(value),
+                      name === 'net' ? 'Net' : 'Discount',
+                    ]}
+                    contentStyle={{
+                      borderRadius: 12,
+                      border: '1px solid rgba(0,0,0,0.08)',
+                      boxShadow: '0 12px 30px rgba(0,0,0,0.06)',
+                      fontSize: 11,
+                    }}
+                  />
+                  <Bar
+                    dataKey="net"
+                    stackId="a"
+                    fill={REVENUE_COLORS[0]}
+                    radius={[10, 0, 0, 10]}
+                  />
+                  <Bar
+                    dataKey="discount"
+                    stackId="a"
+                    fill={REVENUE_COLORS[1]}
+                    radius={[0, 10, 10, 0]}
+                  />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2 text-[10px] text-neutral-500">
+              <span className="inline-flex items-center gap-1 rounded-full bg-white/80 border border-neutral-200 px-2 py-0.5 shadow-soft">
+                <span
+                  className="h-2 w-2 rounded-full"
+                  style={{ backgroundColor: REVENUE_COLORS[0] }}
+                />
+                Net value (current prices × stock)
+              </span>
+              <span className="inline-flex items-center gap-1 rounded-full bg-white/80 border border-neutral-200 px-2 py-0.5 shadow-soft">
+                <span
+                  className="h-2 w-2 rounded-full"
+                  style={{ backgroundColor: REVENUE_COLORS[1] }}
+                />
+                Discounted away from list price
+              </span>
+            </div>
+          </div>
+
+          {/* Compact products-per-category + all categories link */}
           <div
             className="
               rounded-2xl
@@ -132,21 +281,43 @@ export default function AdminDashboardClient({ data }) {
               shadow-soft
               backdrop-blur-md
               p-4 sm:p-5
-              flex flex-col
-              min-h-[260px]
+              flex flex-col gap-3
+              min-h-[220px]
             "
           >
-            <h2 className="font-poppins text-sm font-semibold text-neutral-600 mb-1">
-              Products per category
-            </h2>
-            <p className="text-[11px] text-neutral-400 mb-3">
-              See how your catalog is distributed across main categories.
-            </p>
-            <div className="flex-1 min-h-[200px]">
+            <div className="flex items-center justify-between gap-2">
+              <div>
+                <h2 className="font-poppins text-sm font-semibold text-neutral-600">
+                  Top categories
+                </h2>
+                <p className="text-[11px] text-neutral-400">
+                  Quick view of where most products live.
+                </p>
+              </div>
+              <button
+                type="button"
+                className="
+                  inline-flex items-center gap-1
+                  text-[11px] font-semibold
+                  text-primary-600
+                  rounded-full
+                  px-2.5 py-1
+                  bg-primary-50/80
+                  border border-primary-100
+                  shadow-soft
+                "
+                title="This is just a visual summary – counts from DB."
+              >
+                <ArrowRight size={12} />
+                {productsPerCategoryAll.length} categories
+              </button>
+            </div>
+
+            <div className="flex-1 min-h-[160px]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart
-                  data={productsPerCategory}
-                  margin={{ top: 10, right: 10, left: -20, bottom: 20 }}
+                  data={productsPerCategoryTop}
+                  margin={{ top: 5, right: 10, left: -20, bottom: 20 }}
                 >
                   <XAxis
                     dataKey="name"
@@ -172,119 +343,119 @@ export default function AdminDashboardClient({ data }) {
               </ResponsiveContainer>
             </div>
           </div>
+        </div>
 
-          {/* Pie charts (flags + roles) */}
-          <div className="grid gap-4 sm:grid-rows-2">
-            {/* Product flags */}
-            <div
-              className="
-                rounded-2xl
-                bg-white/90
-                border border-neutral-200/80
-                shadow-soft
-                backdrop-blur-md
-                p-4
-                flex flex-col
-                min-h-[160px]
-              "
-            >
-              <h2 className="font-poppins text-sm font-semibold text-neutral-600 mb-1">
-                Product highlights
-              </h2>
-              <p className="text-[11px] text-neutral-400 mb-2">
-                Distribution of best sellers, featured, and new arrivals.
-              </p>
-              <div className="flex-1 flex items-center justify-center">
-                <ResponsiveContainer width="100%" height={130}>
-                  <PieChart>
-                    <Pie
-                      data={flagDistribution}
-                      dataKey="value"
-                      nameKey="name"
-                      innerRadius={30}
-                      outerRadius={50}
-                      paddingAngle={2}
-                    >
-                      {flagDistribution.map((entry, index) => (
-                        <Cell
-                          key={`flag-${index}`}
-                          fill={FLAG_COLORS[index % FLAG_COLORS.length]}
-                        />
-                      ))}
-                    </Pie>
-                  </PieChart>
-                </ResponsiveContainer>
-              </div>
-              <div className="flex flex-wrap gap-2 justify-center mt-1">
-                {flagDistribution.map((f, i) => (
-                  <span
-                    key={f.name}
-                    className="inline-flex items-center gap-1 rounded-full border border-neutral-200 bg-neutral-50 px-2 py-1 text-[10px] text-neutral-500"
+        {/* Secondary charts: product flags + user roles */}
+        <div className="grid gap-6 lg:grid-cols-2">
+          {/* Product flags */}
+          <div
+            className="
+              rounded-2xl
+              bg-white/90
+              border border-neutral-200/80
+              shadow-soft
+              backdrop-blur-md
+              p-4 sm:p-5
+              flex flex-col
+              min-h-[200px]
+            "
+          >
+            <h2 className="font-poppins text-sm font-semibold text-neutral-600 mb-1">
+              Product highlights
+            </h2>
+            <p className="text-[11px] text-neutral-400 mb-2">
+              Distribution of best sellers, featured, and new arrivals.
+            </p>
+            <div className="flex-1 flex items-center justify-center">
+              <ResponsiveContainer width="100%" height={150}>
+                <PieChart>
+                  <Pie
+                    data={flagDistribution}
+                    dataKey="value"
+                    nameKey="name"
+                    innerRadius={35}
+                    outerRadius={55}
+                    paddingAngle={2}
                   >
-                    <span
-                      className="h-2 w-2 rounded-full"
-                      style={{ backgroundColor: FLAG_COLORS[i] }}
-                    />
-                    {f.name}: {f.value}
-                  </span>
-                ))}
-              </div>
+                    {flagDistribution.map((entry, index) => (
+                      <Cell
+                        key={`flag-${index}`}
+                        fill={FLAG_COLORS[index % FLAG_COLORS.length]}
+                      />
+                    ))}
+                  </Pie>
+                </PieChart>
+              </ResponsiveContainer>
             </div>
-
-            {/* User roles */}
-            <div
-              className="
-                rounded-2xl
-                bg-white/90
-                border border-neutral-200/80
-                shadow-soft
-                backdrop-blur-md
-                p-4
-                flex flex-col
-                min-h-[160px]
-              "
-            >
-              <h2 className="font-poppins text-sm font-semibold text-neutral-600 mb-1">
-                Users by role
-              </h2>
-              <p className="text-[11px] text-neutral-400 mb-2">
-                Quick look at how many admins vs regular users are registered.
-              </p>
-              <div className="flex-1 flex items-center justify-center">
-                <ResponsiveContainer width="100%" height={130}>
-                  <PieChart>
-                    <Pie
-                      data={roleDistribution}
-                      dataKey="value"
-                      nameKey="name"
-                      innerRadius={30}
-                      outerRadius={50}
-                      paddingAngle={2}
-                    >
-                      {roleDistribution.map((entry, index) => (
-                        <Cell
-                          key={`role-${index}`}
-                          fill={ROLE_COLORS[index % ROLE_COLORS.length]}
-                        />
-                      ))}
-                    </Pie>
-                  </PieChart>
-                </ResponsiveContainer>
-              </div>
-              <div className="flex flex-wrap gap-2 justify-center mt-1">
-                {roleDistribution.map((r, i) => (
+            <div className="flex flex-wrap gap-2 justify-center mt-1">
+              {flagDistribution.map((f, i) => (
+                <span
+                  key={f.name}
+                  className="inline-flex items-center gap-1 rounded-full border border-neutral-200 bg-neutral-50 px-2 py-1 text-[10px] text-neutral-500"
+                >
                   <span
-                    key={r.name}
-                    className="inline-flex items-center gap-1 rounded-full border border-neutral-200 bg-neutral-50 px-2 py-1 text-[10px] text-neutral-500"
+                    className="h-2 w-2 rounded-full"
+                    style={{ backgroundColor: FLAG_COLORS[i] }}
+                  />
+                  {f.name}: {f.value}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* User roles */}
+          <div
+            className="
+              rounded-2xl
+              bg-white/90
+              border border-neutral-200/80
+              shadow-soft
+              backdrop-blur-md
+              p-4 sm:p-5
+              flex flex-col
+              min-h-[200px]
+            "
+          >
+            <h2 className="font-poppins text-sm font-semibold text-neutral-600 mb-1">
+              Users by role
+            </h2>
+            <p className="text-[11px] text-neutral-400 mb-2">
+              Quick look at how many admins vs regular users are registered.
+            </p>
+            <div className="flex-1 flex items-center justify-center">
+              <ResponsiveContainer width="100%" height={150}>
+                <PieChart>
+                  <Pie
+                    data={roleDistribution}
+                    dataKey="value"
+                    nameKey="name"
+                    innerRadius={35}
+                    outerRadius={55}
+                    paddingAngle={2}
                   >
-                    <span
-                      className="h-2 w-2 rounded-full"
-                      style={{ backgroundColor: ROLE_COLORS[i] }}
-                    />
-                    {r.name}: {r.value}
-                  </span>
-                ))}
-              </div>
+                    {roleDistribution.map((entry, index) => (
+                      <Cell
+                        key={`role-${index}`}
+                        fill={ROLE_COLORS[index % ROLE_COLORS.length]}
+                      />
+                    ))}
+                  </Pie>
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="flex flex-wrap gap-2 justify-center mt-1">
+              {roleDistribution.map((r, i) => (
+                <span
+                  key={r.name}
+                  className="inline-flex items-center gap-1 rounded-full border border-neutral-200 bg-neutral-50 px-2 py-1 text-[10px] text-neutral-500"
+                >
+                  <span
+                    className="h-2 w-2 rounded-full"
+                    style={{ backgroundColor: ROLE_COLORS[i] }}
+                  />
+                  {r.name}: {r.value}
+                </span>
+              ))}
             </div>
           </div>
         </div>

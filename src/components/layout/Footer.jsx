@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Mail, MapPin, Phone, Instagram, Facebook, MessageCircle } from 'lucide-react'
+import { Mail, MapPin, Phone, Github, Linkedin, Facebook } from 'lucide-react'
 import Container from './Container'
 
 export default function Footer() {
@@ -71,7 +71,7 @@ export default function Footer() {
                   </li>
                   <li>
                     <span className="text-xs inline-flex items-center gap-1 rounded-full bg-primary-50/80 border border-primary-100 px-2.5 py-1 text-primary-600 shadow-soft mt-1">
-                      New arrivals & curated best sellers
+                      New arrivals &amp; curated best sellers
                     </span>
                   </li>
                 </ul>
@@ -115,17 +115,17 @@ export default function Footer() {
                   <div className="flex items-center gap-2">
                     <a
                       href="#"
-                      aria-label="WhatsApp"
-                      className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary-50/90 border border-primary-100 text-primary-600 shadow-soft hover:bg-primary-100 transition-colors"
+                      aria-label="GitHub"
+                      className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-neutral-50/90 border border-neutral-200 text-neutral-700 shadow-soft hover:bg-neutral-100 transition-colors"
                     >
-                      <MessageCircle size={16} />
+                      <Github size={16} />
                     </a>
                     <a
                       href="#"
-                      aria-label="Instagram"
-                      className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-secondary-50/90 border border-secondary-100 text-secondary-600 shadow-soft hover:bg-secondary-100 transition-colors"
+                      aria-label="LinkedIn"
+                      className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary-50/90 border border-primary-100 text-primary-700 shadow-soft hover:bg-primary-100 transition-colors"
                     >
-                      <Instagram size={16} />
+                      <Linkedin size={16} />
                     </a>
                     <a
                       href="#"
@@ -145,20 +145,40 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-neutral-200/80 bg-white/80 backdrop-blur-md">
         <Container className="py-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between text-[11px] sm:text-xs text-neutral-400">
-          <div>
-            © {year} BabyBloom. All rights reserved.
-          </div>
+          <div>© {year} BabyBloom. All rights reserved.</div>
+
           <div className="flex flex-wrap items-center gap-3">
             <div className="inline-flex items-center gap-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-primary-400" />
               <span>Made with care for little ones in Bangladesh</span>
             </div>
-            <div className="flex items-center gap-3">
-              <Link href="#" className="hover:text-primary-500 transition-colors">
+
+            <div className="flex flex-wrap items-center gap-3">
+              <Link
+                href="/about"
+                className="hover:text-primary-500 transition-colors"
+              >
+                About us
+              </Link>
+              <span className="text-neutral-300">•</span>
+              <Link
+                href="/contact"
+                className="hover:text-primary-500 transition-colors"
+              >
+                Contact us
+              </Link>
+              <span className="text-neutral-300">•</span>
+              <Link
+                href="#"
+                className="hover:text-primary-500 transition-colors"
+              >
                 Privacy Policy
               </Link>
               <span className="text-neutral-300">•</span>
-              <Link href="#" className="hover:text-primary-500 transition-colors">
+              <Link
+                href="#"
+                className="hover:text-primary-500 transition-colors"
+              >
                 Terms of Service
               </Link>
             </div>

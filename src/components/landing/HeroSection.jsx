@@ -48,7 +48,7 @@ export default function HeroSection() {
                   />
 
                   {/* overlay */}
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-neutral-500/70 via-neutral-500/20 to-transparent" />
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-primary-700/70 via-primary-300/20 to-transparent" />
 
                   {/* Centered Text + CTA */}
                   <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-10 pt-35">

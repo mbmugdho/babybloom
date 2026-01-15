@@ -1,5 +1,3 @@
-// src/app/admin/page.js
-
 import Container from '@/components/layout/Container'
 import connectDB from '@/lib/mongodb'
 import Product from '@/models/Product'
@@ -20,7 +18,9 @@ async function getDashboardData() {
 
   const [products, categories, userRoleAgg] = await Promise.all([
     Product.find({})
-      .select('isBestSeller isFeatured isNewArrival categorySlug')
+      .select(
+        'isBestSeller isFeatured isNewArrival categorySlug price originalPrice discount stockQuantity'
+      )
       .lean(),
     Category.find({ isActive: true })
       .select('name slug categoryId productCount')
@@ -36,6 +36,35 @@ async function getDashboardData() {
   const featuredCount = products.filter((p) => p.isFeatured).length
   const newArrivalCount = products.filter((p) => p.isNewArrival).length
 
+  // Potential revenue & discount
+  let potentialGross = 0
+  let potentialNet = 0
+  let potentialDiscountValue = 0
+  let totalDiscountPercent = 0
+  let discountCount = 0
+
+  products.forEach((p) => {
+    const price = p.price || 0
+    const original = p.originalPrice || price
+    const qty = p.stockQuantity || 0
+
+    const gross = original * qty
+    const net = price * qty
+    const discountVal = Math.max(0, gross - net)
+
+    potentialGross += gross
+    potentialNet += net
+    potentialDiscountValue += discountVal
+
+    if (p.discount) {
+      totalDiscountPercent += p.discount
+      discountCount += 1
+    }
+  })
+
+  const avgDiscount =
+    discountCount > 0 ? totalDiscountPercent / discountCount : 0
+
   const productsPerCategory = categories.map((cat) => ({
     name: cat.name,
     slug: cat.slug,
@@ -44,6 +73,10 @@ async function getDashboardData() {
         ? cat.productCount
         : products.filter((p) => p.categorySlug === cat.slug).length,
   }))
+
+  const topCategories = [...productsPerCategory]
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 4)
 
   const flagDistribution = [
     { name: 'Best sellers', value: bestSellerCount },
@@ -64,8 +97,13 @@ async function getDashboardData() {
       bestSellerCount,
       featuredCount,
       newArrivalCount,
+      potentialGross,
+      potentialNet,
+      potentialDiscountValue,
+      avgDiscount,
     },
-    productsPerCategory,
+    productsPerCategoryTop: topCategories,
+    productsPerCategoryAll: productsPerCategory,
     flagDistribution,
     roleDistribution,
   }

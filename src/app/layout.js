@@ -3,6 +3,7 @@ import './globals.css'
 import { Toaster } from 'react-hot-toast'
 import { Navbar, Footer } from '@/components/layout'
 import { AuthProvider } from '@/context/AuthContext'
+import AppClientShell from '@/components/layout/AppClientShell' 
 
 export const metadata = {
   title: {
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <body className="font-inter text-neutral-500 min-h-screen antialiased">
         <AuthProvider>
+          <AppClientShell /> 
           <Toaster
             containerClassName="pointer-events-none mx-2 sm:mx-4"
             position="top-right"
@@ -36,7 +38,6 @@ export default function RootLayout({ children }) {
               error: { iconTheme: { primary: '#E74C3C', secondary: '#fff' } },
             }}
           />
-
           <Navbar />
           <main>{children}</main>
           <Footer />

@@ -70,7 +70,7 @@ const itemVariants = {
 
 export default function FeaturesSection() {
   return (
-    <section className="py-10 md:py-15 ">
+    <section className="pt-10 md:pt-15 ">
       <div className="container">
         {/* Section Header */}
         <motion.div

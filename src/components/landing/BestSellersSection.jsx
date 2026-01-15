@@ -107,7 +107,7 @@ export default function BestSellersSection() {
 
   if (loading) {
     return (
-      <section className="py-10 md:py-15">
+      <section className="pt-10 md:pt-15">
         <div className="container">
           <div className="text-center mb-7 md:mb-10">
             <div className="h-10 bg-neutral-200 rounded-lg w-64 mx-auto mb-4 shimmer" />
@@ -133,7 +133,7 @@ export default function BestSellersSection() {
 
   if (error) {
     return (
-      <section className="py-10 md:py-15">
+      <section className="pt-10 md:pt-15">
         <div className="container">
           <div className="text-center text-neutral-400">
             <p>{error}</p>
@@ -148,7 +148,7 @@ export default function BestSellersSection() {
   }
 
   return (
-    <section className="py-10 md:py-15">
+    <section className="pt-10 md:pt-15">
       <div className="container">
         {/* Section Header */}
         <motion.div

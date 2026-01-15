@@ -28,7 +28,6 @@ export default function NewsletterSection() {
     setError('')
     setStatus('loading')
 
-    // Fake async submit – later you can POST to /api/newsletter
     try {
       await new Promise((resolve) => setTimeout(resolve, 900))
       setStatus('success')
@@ -40,7 +39,7 @@ export default function NewsletterSection() {
   }
 
   return (
-    <section className="py-10 md:py-14">
+    <section className="pt-10 md:pt-14">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

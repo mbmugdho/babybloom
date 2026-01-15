@@ -91,8 +91,6 @@ export default function CheckoutClient() {
     setSubmitting(true)
 
     try {
-      // Here you would normally POST order data to /api/orders
-      // For this portfolio, we'll just simulate success.
 
       // Simulate async delay
       await new Promise((res) => setTimeout(res, 800))
