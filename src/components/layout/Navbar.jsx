@@ -37,6 +37,15 @@ export default function Navbar() {
           >
             Categories
           </Link>
+
+          <Link
+            href="/cart"
+            className="hover:text-primary-400 flex items-center gap-1 transition"
+          >
+            <ShoppingBag size={16} />
+            Cart
+          </Link>
+
           <Link
             href="/login"
             className="hover:text-primary-400 flex items-center gap-1 transition"
@@ -45,8 +54,26 @@ export default function Navbar() {
           </Link>
         </nav>
 
-        {/* Mobile Hamburger */}
-        <div className="md:hidden relative">
+        {/* Mobile: Cart + Hamburger */}
+        <div className="md:hidden relative flex items-center gap-2">
+          {/* Cart icon (mobile) */}
+          <Link
+            href="/cart"
+            aria-label="Cart"
+            className="
+              inline-flex items-center justify-center
+              rounded-full
+              border border-primary-100
+              bg-primary-50/80
+              p-1.5
+              text-primary-600
+              shadow-soft
+            "
+          >
+            <ShoppingBag size={18} />
+          </Link>
+
+          {/* Hamburger */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="btn btn-ghost btn-sm p-2"
@@ -63,29 +90,29 @@ export default function Navbar() {
               exit={{ opacity: 0, x: 40 }}
               transition={{ duration: 0.25, ease: 'easeOut' }}
               className="
-      absolute right-0 top-16
-      w-42
-      bg-[#6A9C87]
-      rounded-2xl
-      shadow-lg
-      p-2
-      flex flex-col
-      items-center
-      gap-1.5
-      z-50
-    "
+                absolute right-0 top-16
+                w-42
+                bg-[#6A9C87]
+                rounded-2xl
+                shadow-lg
+                p-2
+                flex flex-col
+                items-center
+                gap-1.5
+                z-50
+              "
             >
               <Link
                 href="/products"
                 className="
-        text-center
-        p-4
-        bg-[#b5d7c7]
-        text-neutral-900
-        rounded-2xl
-        hover:bg-[#d9ebe2]
-        transition
-      "
+                  text-center
+                  p-4
+                  bg-[#b5d7c7]
+                  text-neutral-900
+                  rounded-2xl
+                  hover:bg-[#d9ebe2]
+                  transition
+                "
                 onClick={() => setIsOpen(false)}
               >
                 Products
@@ -94,31 +121,49 @@ export default function Navbar() {
               <Link
                 href="/categories"
                 className="
-        text-center
-        p-4
-        bg-[#b5d7c7]
-        text-neutral-900
-        rounded-2xl
-        hover:bg-[#d9ebe2]
-        transition
-      "
+                  text-center
+                  p-4
+                  bg-[#b5d7c7]
+                  text-neutral-900
+                  rounded-2xl
+                  hover:bg-[#d9ebe2]
+                  transition
+                "
                 onClick={() => setIsOpen(false)}
               >
                 Categories
               </Link>
 
               <Link
+                href="/cart"
+                className="
+                  text-center
+                  p-4
+                  bg-[#b5d7c7]
+                  text-neutral-900
+                  rounded-2xl
+                  flex items-center justify-center gap-2
+                  hover:bg-[#d9ebe2]
+                  transition
+                "
+                onClick={() => setIsOpen(false)}
+              >
+                <ShoppingBag size={16} />
+                Cart
+              </Link>
+
+              <Link
                 href="/login"
                 className="
-        text-center
-        p-4
-        bg-[#b5d7c7]
-        text-neutral-900
-        rounded-2xl
-        flex items-center justify-center gap-2
-        hover:bg-[#d9ebe2]
-        transition
-      "
+                  text-center
+                  p-4
+                  bg-[#b5d7c7]
+                  text-neutral-900
+                  rounded-2xl
+                  flex items-center justify-center gap-2
+                  hover:bg-[#d9ebe2]
+                  transition
+                "
                 onClick={() => setIsOpen(false)}
               >
                 <User size={16} />
