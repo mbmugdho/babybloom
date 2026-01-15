@@ -43,7 +43,7 @@ export default function Footer() {
                 </p>
 
                 <p className="text-xs text-neutral-400">
-                  Serving parents in Dhaka, Chattogram, Sylhet, and beyond.
+                  Serving parents in Dhaka, Chattogram, Rangpur, and beyond.
                 </p>
               </div>
 
@@ -71,7 +71,7 @@ export default function Footer() {
                   </li>
                   <li>
                     <span className="text-xs inline-flex items-center gap-1 rounded-full bg-primary-50/80 border border-primary-100 px-2.5 py-1 text-primary-600 shadow-soft mt-1">
-                      New arrivals &amp; curated best sellers
+                      New arrivals & curated best sellers
                     </span>
                   </li>
                 </ul>
@@ -83,9 +83,9 @@ export default function Footer() {
                   Popular categories
                 </h4>
                 <ul className="space-y-1.5 text-neutral-400">
-                  <li>Diapers &amp; Wipes</li>
-                  <li>Skincare &amp; Bath</li>
-                  <li>Feeding &amp; Nursing</li>
+                  <li>Diapers & Wipes</li>
+                  <li>Skincare & Bath</li>
+                  <li>Feeding & Nursing</li>
                   <li>Baby Clothing</li>
                 </ul>
               </div>
@@ -114,21 +114,21 @@ export default function Footer() {
                   <span className="text-xs text-neutral-400">Find us on</span>
                   <div className="flex items-center gap-2">
                     <a
-                      href="#"
+                      href="https://github.com/mbmugdho"
                       aria-label="GitHub"
                       className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-neutral-50/90 border border-neutral-200 text-neutral-700 shadow-soft hover:bg-neutral-100 transition-colors"
                     >
                       <Github size={16} />
                     </a>
                     <a
-                      href="#"
+                      href="https://www.linkedin.com/in/md-montasir-billah/"
                       aria-label="LinkedIn"
                       className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary-50/90 border border-primary-100 text-primary-700 shadow-soft hover:bg-primary-100 transition-colors"
                     >
                       <Linkedin size={16} />
                     </a>
                     <a
-                      href="#"
+                      href="https://www.facebook.com/mugdho7674"
                       aria-label="Facebook"
                       className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-accent-50/90 border border-accent-100 text-accent-700 shadow-soft hover:bg-accent-100 transition-colors"
                     >
@@ -169,14 +169,14 @@ export default function Footer() {
               </Link>
               <span className="text-neutral-300">•</span>
               <Link
-                href="#"
+                href="/privacy"
                 className="hover:text-primary-500 transition-colors"
               >
                 Privacy Policy
               </Link>
               <span className="text-neutral-300">•</span>
               <Link
-                href="#"
+                href="/terms"
                 className="hover:text-primary-500 transition-colors"
               >
                 Terms of Service
