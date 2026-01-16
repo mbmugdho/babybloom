@@ -1,4 +1,3 @@
-// src/app/add-product/AddProductForm.jsx
 'use client'
 
 import { useState } from 'react'
@@ -509,7 +508,7 @@ export default function AddProductForm({ categories }) {
                   transition
                 "
                 rows={4}
-                placeholder="- Gentle on skin&#10;- Hypoallergenic"
+                placeholder="- Gentle on skin- Hypoallergenic"
               />
             </div>
 
@@ -534,7 +533,7 @@ export default function AddProductForm({ categories }) {
                   transition
                 "
                 rows={4}
-                placeholder="- Apply a small amount&#10;- Massage gently"
+                placeholder="- Apply a small amount- Massage gently"
               />
             </div>
           </div>

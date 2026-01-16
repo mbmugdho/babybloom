@@ -11,9 +11,9 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.12
-    }
-  }
+      staggerChildren: 0.12,
+    },
+  },
 }
 
 const itemVariants = {
@@ -23,12 +23,12 @@ const itemVariants = {
     y: 0,
     transition: {
       duration: 0.5,
-      ease: 'easeOut'
-    }
-  }
+      ease: 'easeOut',
+    },
+  },
 }
 
-// Color presets for  glows
+// Color presets for glows
 const colorPresets = [
   {
     border: 'border-primary-200',
@@ -68,13 +68,13 @@ export default function BestSellersSection() {
   const fetchBestSellers = async () => {
     try {
       const response = await fetch('/api/products')
-      
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
       }
-      
+
       const data = await response.json()
-      
+
       if (data.success) {
         setProducts(data.data || [])
       } else {
@@ -89,19 +89,20 @@ export default function BestSellersSection() {
   }
 
   const bestSellers = useMemo(() => {
-    const filtered = products.filter(p => p.isBestSeller)
-    
+    const filtered = products.filter((p) => p.isBestSeller)
+
     // Sort by rating desc, then reviews desc
     filtered.sort((a, b) => {
       const ratingDiff = (b.rating || 0) - (a.rating || 0)
       if (ratingDiff !== 0) return ratingDiff
       return (b.reviewsCount || 0) - (a.reviewsCount || 0)
     })
-    
+
     return filtered.slice(0, 8)
   }, [products])
 
   const formatPrice = (price) => {
+    if (typeof price !== 'number') return '৳0'
     return `৳${price.toLocaleString()}`
   }
 
@@ -115,7 +116,10 @@ export default function BestSellersSection() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
-              <div key={n} className="relative overflow-hidden rounded-2xl border border-white/60 bg-white/70 shadow-soft backdrop-blur-md p-5">
+              <div
+                key={n}
+                className="relative overflow-hidden rounded-2xl border border-white/60 bg-white/70 shadow-soft backdrop-blur-md p-5"
+              >
                 <div className="absolute -right-10 -top-10 h-24 w-24 rounded-full bg-primary-100/40 blur-2xl" />
                 <div className="absolute -left-12 -bottom-10 h-24 w-28 rounded-full bg-accent-100/40 blur-2xl" />
                 <div className="relative z-10 space-y-3">
@@ -161,10 +165,10 @@ export default function BestSellersSection() {
           <p className="text-xs font-semibold uppercase tracking-widest text-primary-500 mb-2">
             Parent Favorites
           </p>
-          <h2 className="font-poppins text-3xl md:text-4xl font-bold text-neutral-500 mb-4">
+          <h2 className="font-poppins text-3xl md:text-4xl font-bold text-neutral-500 ">
             Best Sellers
           </h2>
-          <p className="text-neutral-400 text-lg max-w-2xl mx-auto">
+          <p className="text-neutral-400 text-lg ">
             Our most loved products trusted by thousands of happy parents
           </p>
         </motion.div>
@@ -174,12 +178,14 @@ export default function BestSellersSection() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: '-100px' }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
         >
           {bestSellers.map((product, idx) => {
             const preset = colorPresets[idx % colorPresets.length]
-            const imageSrc = product.image || 'https://placehold.co/400x400/e8e8e8/999999?text=Product'
+            const imageSrc =
+              product.image ||
+              'https://placehold.co/400x400/e8e8e8/999999?text=Product'
 
             return (
               <motion.article
@@ -199,13 +205,18 @@ export default function BestSellersSection() {
                 `}
               >
                 {/* Decorative Glows */}
-                <div className={`pointer-events-none absolute -right-10 -top-10 h-24 w-24 rounded-full ${preset.glow1} opacity-50 blur-2xl group-hover:scale-125 transition-transform duration-500`} />
-                <div className={`pointer-events-none absolute -left-14 -bottom-12 h-28 w-32 rounded-full ${preset.glow2} opacity-50 blur-2xl group-hover:scale-125 transition-transform duration-500`} />
+                <div
+                  className={`pointer-events-none absolute -right-10 -top-10 h-24 w-24 rounded-full ${preset.glow1} opacity-50 blur-2xl group-hover:scale-125 transition-transform duration-500`}
+                />
+                <div
+                  className={`pointer-events-none absolute -left-14 -bottom-12 h-28 w-32 rounded-full ${preset.glow2} opacity-50 blur-2xl group-hover:scale-125 transition-transform duration-500`}
+                />
 
                 <div className="relative z-10 flex flex-col h-full">
                   {/* Badges Row */}
                   <div className="flex items-center justify-between mb-3">
-                    <span className={`
+                    <span
+                      className={`
                       inline-flex items-center gap-1.5
                       rounded-full
                       px-3 py-1
@@ -215,7 +226,8 @@ export default function BestSellersSection() {
                       ${preset.badgeText}
                       border
                       shadow-soft
-                    `}>
+                    `}
+                    >
                       <span className="h-1.5 w-1.5 rounded-full bg-current" />
                       Best Seller
                     </span>
@@ -227,16 +239,30 @@ export default function BestSellersSection() {
                     )}
                   </div>
 
-                  {/* Image */}
-                  <div className="relative w-full h-44 rounded-xl overflow-hidden mb-3 border border-white/70 shadow-soft bg-neutral-50">
+                  {/* Image – full product visible */}
+                  <div
+                    className="
+                      relative w-full
+                      h-40 sm:h-44
+                      rounded-xl overflow-hidden
+                      mb-3
+                      border border-white/70
+                      shadow-soft
+                      bg-neutral-50
+                    "
+                  >
                     <Image
                       src={imageSrc}
                       alt={product.name}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="
+                        object-contain
+                        p-3
+                        transition-transform duration-500
+                        group-hover:scale-105
+                      "
                       sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent" />
                   </div>
 
                   {/* Brand */}

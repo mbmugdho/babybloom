@@ -37,7 +37,7 @@ export default function ShopByAgeSection() {
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-500 mb-1.5">
                 Shop by age or need
               </p>
-              <h2 className="font-poppins text-lg sm:text-xl md:text-2xl font-semibold text-neutral-600 mb-1">
+              <h2 className="font-poppins text-lg sm:text-xl md:text-2xl font-semibold text-neutral-600 ">
                 Find what fits your baby's chapter
               </h2>
               <p className="text-xs sm:text-sm text-neutral-400">

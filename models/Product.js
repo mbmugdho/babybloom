@@ -15,7 +15,6 @@ const ProductSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      // Removed "index: true" since unique already creates an index
     },
     brand: {
       type: String,
@@ -118,14 +117,13 @@ const ProductSchema = new mongoose.Schema(
 );
 
 // Create indexes for better query performance
-// Note: unique: true already creates an index, so we don't need to add them again
 ProductSchema.index({ category: 1 });
 ProductSchema.index({ categorySlug: 1 });
 ProductSchema.index({ isFeatured: 1 });
 ProductSchema.index({ isBestSeller: 1 });
 ProductSchema.index({ isNewArrival: 1 });
 
-// Prevent model recompilation in development
+// Prevent model recompilation 
 const Product = mongoose.models.Product || mongoose.model("Product", ProductSchema);
 
 export default Product;

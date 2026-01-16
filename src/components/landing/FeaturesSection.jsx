@@ -81,14 +81,14 @@ export default function FeaturesSection() {
           className="text-center mb-7 md:mb-10"
         >
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-500 mb-2">
-            Why parents love BabyBloom
+            Why parents love BabyBloom?
           </p>
-          <h2 className="font-poppins text-3xl md:text-4xl font-bold text-neutral-500 mb-4">
+          <h2 className="font-poppins text-3xl md:text-4xl font-bold text-neutral-500 ">
             Gentle essentials, thoughtfully curated
           </h2>
           <p className="text-neutral-400 text-lg  ">
             We handpick baby products with comfort, safety, and simplicity in
-            mind—so you can shop with peace of mind.
+            mind — so you can shop with peace of mind.
           </p>
         </motion.div>
 

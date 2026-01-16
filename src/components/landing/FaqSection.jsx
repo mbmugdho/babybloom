@@ -37,7 +37,7 @@ export default function FaqSection() {
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-500 mb-2">
             Questions from parents
           </p>
-          <h2 className="font-poppins text-2xl md:text-3xl font-bold text-neutral-600 mb-2">
+          <h2 className="font-poppins text-2xl md:text-3xl font-bold text-neutral-600">
             Frequently asked questions
           </h2>
           <p className="text-sm md:text-base text-neutral-400">

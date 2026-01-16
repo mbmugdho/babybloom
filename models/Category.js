@@ -38,7 +38,6 @@ const CategorySchema = new mongoose.Schema(
   }
 )
 
-// Prevent model recompilation in development
 const Category =
   mongoose.models.Category || mongoose.model('Category', CategorySchema)
 

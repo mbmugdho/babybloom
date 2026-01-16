@@ -28,7 +28,7 @@ export default function HeroSection() {
   return (
     <section className="w-full px-4 sm:px-6 lg:px-8 mt-4 lg:mt-8">
       <div className="mx-auto max-w-container">
-        <div className="relative overflow-hidden rounded-3xl border border-neutral-100 shadow-section">
+        <div className="relative overflow-hidden rounded-3xl  drop-shadow-lg">
           <Swiper
             modules={[Autoplay]}
             autoplay={{ delay: 4000, disableOnInteraction: false }}
@@ -48,7 +48,7 @@ export default function HeroSection() {
                   />
 
                   {/* overlay */}
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-primary-700/70 via-primary-300/20 to-transparent" />
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-primary-800/70 via-primary-400/30 to-transparent" />
 
                   {/* Centered Text + CTA */}
                   <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-10 pt-35">

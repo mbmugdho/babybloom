@@ -117,7 +117,7 @@ export default function WhyChooseUsSection() {
           <h2 className="font-poppins text-3xl md:text-4xl font-bold text-neutral-500 mb-4">
             Why Parents Choose Us
           </h2>
-          <p className="text-neutral-400 text-lg max-w-2xl mx-auto">
+          <p className="text-neutral-400 text-lg ">
             We're committed to providing the best for your baby with safe,
             quality products
           </p>

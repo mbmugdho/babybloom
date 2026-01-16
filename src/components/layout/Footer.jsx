@@ -116,6 +116,8 @@ export default function Footer() {
                     <a
                       href="https://github.com/mbmugdho"
                       aria-label="GitHub"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-neutral-50/90 border border-neutral-200 text-neutral-700 shadow-soft hover:bg-neutral-100 transition-colors"
                     >
                       <Github size={16} />
@@ -123,6 +125,8 @@ export default function Footer() {
                     <a
                       href="https://www.linkedin.com/in/md-montasir-billah/"
                       aria-label="LinkedIn"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary-50/90 border border-primary-100 text-primary-700 shadow-soft hover:bg-primary-100 transition-colors"
                     >
                       <Linkedin size={16} />
@@ -130,6 +134,8 @@ export default function Footer() {
                     <a
                       href="https://www.facebook.com/mugdho7674"
                       aria-label="Facebook"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-accent-50/90 border border-accent-100 text-accent-700 shadow-soft hover:bg-accent-100 transition-colors"
                     >
                       <Facebook size={16} />
@@ -150,7 +156,7 @@ export default function Footer() {
           <div className="flex flex-wrap items-center gap-3">
             <div className="inline-flex items-center gap-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-primary-400" />
-              <span>Made with care for little ones in Bangladesh</span>
+              <span>Made with care for little Blooms</span>
             </div>
 
             <div className="flex flex-wrap items-center gap-3">
