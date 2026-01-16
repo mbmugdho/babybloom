@@ -1,5 +1,3 @@
-// src/components/landing/FaqSection.jsx
-
 import { ChevronDown } from 'lucide-react'
 
 const faqs = [
@@ -42,7 +40,7 @@ export default function FaqSection() {
           </h2>
           <p className="text-sm md:text-base text-neutral-400">
             A quick guide to how BabyBloom works, what we offer, and how we
-            support you through every stage of your baby's journey.
+            support you through every stage of your baby&apos;s journey.
           </p>
         </div>
 

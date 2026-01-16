@@ -118,7 +118,7 @@ export default function WhyChooseUsSection() {
             Why Parents Choose Us
           </h2>
           <p className="text-neutral-400 text-lg ">
-            We're committed to providing the best for your baby with safe,
+            We&apos;re committed to providing the best for your baby with safe,
             quality products
           </p>
         </motion.div>

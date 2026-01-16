@@ -3,9 +3,7 @@ import connectDB from "@/lib/mongodb";
 import Category from "@/models/Category";
 import Product from "@/models/Product";
 
-// ═══════════════════════════════════════════════════════════════════
 // GET - Fetch Category Details and Products by Category Slug
-// ═══════════════════════════════════════════════════════════════════
 export async function GET(request, { params }) {
   try {
     await connectDB();

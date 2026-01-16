@@ -1,4 +1,3 @@
-// src/app/contact/ContactForm.jsx
 'use client'
 
 import { useState } from 'react'
@@ -88,7 +87,7 @@ export default function ContactForm() {
             Contact us
           </p>
           <h1 className="font-poppins text-2xl sm:text-3xl md:text-4xl font-bold text-neutral-700 mb-2">
-            We're here to help
+            We&apos;re here to help
           </h1>
           <p className="text-sm md:text-base text-neutral-400 max-w-xl">
             Have a question about a product, an order, or a potential

@@ -126,7 +126,7 @@ export default function CategoriesSection() {
           </h2>
           <p className="text-neutral-400 text-sm md:text-base ">
             Explore gentle must-haves across diapers, skincare, feeding, toys,
-            clothing and more — curated for every stage of your baby's
+            clothing and more — curated for every stage of your baby&apos;s
             journey.
           </p>
         </motion.div>

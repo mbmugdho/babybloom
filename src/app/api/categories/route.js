@@ -2,9 +2,7 @@ import { NextResponse } from 'next/server'
 import connectDB from '@/lib/mongodb'
 import Category from '@/models/Category'
 
-// ═══════════════════════════════════════════════════════════════════
 // GET - Fetch All Categories
-// ═══════════════════════════════════════════════════════════════════
 export async function GET() {
   try {
     await connectDB()

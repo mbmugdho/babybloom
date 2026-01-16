@@ -11,14 +11,14 @@ export const metadata = {
 const team = [
   {
     name: 'Md Montasir Billah',
-    role: 'Founder & Full-Stack Developer',
+    role: 'Founder & Full‑Stack Developer',
     bio: 'Builds the product experience from database to UI, making sure every interaction feels calm and intuitive.',
     initials: 'MB',
   },
   {
     name: 'Ayesha Rahman',
     role: 'UX & Visual Designer',
-    bio: 'Shapes the BabyBloom look & feel with soft, parent-friendly design and clear, simple flows.',
+    bio: 'Shapes the BabyBloom look & feel with soft, parent‑friendly design and clear, simple flows.',
     initials: 'AR',
   },
   {
@@ -48,10 +48,12 @@ export default function AboutPage() {
             space-y-8 md:space-y-10
           "
         >
+          {/* Glows */}
           <div className="pointer-events-none absolute -top-16 -right-10 h-40 w-40 rounded-full bg-primary-100/45 blur-3xl" />
           <div className="pointer-events-none absolute -bottom-16 -left-14 h-40 w-44 rounded-full bg-accent-100/45 blur-3xl" />
 
           <div className="relative z-10 space-y-8 md:space-y-10">
+            {/* Intro / Hero copy */}
             <div className="grid gap-6 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1.1fr)] md:items-center">
               <div className="space-y-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-500">
@@ -67,6 +69,7 @@ export default function AboutPage() {
                 </p>
               </div>
 
+              {/* Highlight card */}
               <div
                 className="
                   rounded-2xl
@@ -90,12 +93,13 @@ export default function AboutPage() {
                   together.
                 </p>
                 <p>
-                  Our goal is simple: help you feel calm and confident when
+                  The goal is simple: help you feel calm and confident when
                   choosing something for the little person who matters most.
                 </p>
               </div>
             </div>
 
+            {/* 3 pillars */}
             <div className="grid gap-4 sm:grid-cols-3 text-xs text-neutral-500 pt-2">
               <div className="rounded-2xl bg-primary-50/80 border border-primary-100 p-3 shadow-soft">
                 <p className="font-poppins text-sm font-semibold text-neutral-700 mb-0.5">
@@ -120,7 +124,7 @@ export default function AboutPage() {
                   Gentle by design
                 </p>
                 <p>
-                  A focus on soft, baby-friendly formulations and materials
+                  A focus on soft, baby‑friendly formulations and materials
                   wherever possible.
                 </p>
               </div>
@@ -129,14 +133,14 @@ export default function AboutPage() {
             {/* Our story */}
             <div className="grid gap-6 md:grid-cols-2 text-sm text-neutral-500 leading-relaxed">
               <div className="space-y-2">
-                <h2 className="font-poppins text-sm font-semibold text-neutral-700">
+                <h2 className="font-poppins text-sm font-semibold text-neutral-700 mb-1">
                   Our story
                 </h2>
                 <p>
                   BabyBloom started as a small idea: what if parents could shop
                   for baby essentials in a space that felt as gentle as the
-                  products themselves? No flashing banners, no aggressive upsell
-                - just calm, well-structured shelves.
+                  products themselves? No flashing banners and no aggressive
+                  upsell, just calm, well‑structured shelves.
                 </p>
                 <p>
                   We leaned into soft visuals, clear product descriptions, and a
@@ -145,23 +149,24 @@ export default function AboutPage() {
                 </p>
               </div>
               <div className="space-y-2">
-                <h2 className="font-poppins text-sm font-semibold text-neutral-700">
+                <h2 className="font-poppins text-sm font-semibold text-neutral-700 mb-1">
                   Our promise
                 </h2>
                 <p>
-                  We're not trying to be the biggest store. We'd rather be a
-                  reliable, friendly stop in your day - a place you come back to
-                  because it feels warm, thoughtful, and easy to use.
+                  We are not trying to be the biggest store. We would rather be
+                  a reliable, friendly stop in your day – a place you come back
+                  to because it feels warm, thoughtful, and easy to use.
                 </p>
                 <p>
-                  As we grow, we'll keep improving the experience: refining
-                  categories, surfacing the right products at the right time,
-                  and listening closely to what makes life easier for families
-                  like yours.
+                  As BabyBloom grows, we will keep improving the experience:
+                  refining categories, surfacing the right products at the right
+                  time, and listening closely to what makes life easier for
+                  families like yours.
                 </p>
               </div>
             </div>
 
+            {/* Meet our team */}
             <div className="space-y-4 pt-2">
               <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
                 <div>

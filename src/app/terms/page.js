@@ -1,4 +1,3 @@
-// src/app/terms/page.js
 import Container from '@/components/layout/Container'
 
 export const dynamic = 'force-static'

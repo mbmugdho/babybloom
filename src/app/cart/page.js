@@ -1,14 +1,12 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Container from '@/components/layout/Container'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Trash2, Plus, Minus, ShoppingCart, ArrowLeft } from 'lucide-react'
 import toast from 'react-hot-toast'
-
-
 
 const CART_KEY = 'babybloom_cart'
 
@@ -20,7 +18,7 @@ function formatPriceBDT(amount) {
 function readCart() {
   if (typeof window === 'undefined') return []
   try {
-    const raw = localStorage.getItem(CART_KEY)
+    const raw = window.localStorage.getItem(CART_KEY)
     return raw ? JSON.parse(raw) : []
   } catch {
     return []
@@ -30,22 +28,16 @@ function readCart() {
 function writeCart(items) {
   if (typeof window === 'undefined') return
   try {
-    localStorage.setItem(CART_KEY, JSON.stringify(items))
+    window.localStorage.setItem(CART_KEY, JSON.stringify(items))
   } catch {
     // ignore
   }
 }
 
 export default function CartPage() {
-  const [items, setItems] = useState([])
-  const [loading, setLoading] = useState(true)
+  // Initialize from localStorage directly, no effect needed
+  const [items, setItems] = useState(() => readCart())
   const router = useRouter()
-
-  useEffect(() => {
-    const cart = readCart()
-    setItems(cart)
-    setLoading(false)
-  }, [])
 
   const hasItems = items.length > 0
 
@@ -99,26 +91,11 @@ export default function CartPage() {
       toast.error('Your cart is empty.')
       return
     }
-    // This will be protected later (after login/register)
     router.push('/checkout')
   }
 
   function handleContinueShopping() {
     router.push('/products')
-  }
-
-  if (loading) {
-    return (
-      <section className="py-10 md:py-14">
-        <Container>
-          <div className="rounded-3xl border border-neutral-200 bg-white/80 shadow-section backdrop-blur-md px-4 py-6 sm:px-6 sm:py-7">
-            <div className="h-5 w-44 rounded-full bg-neutral-100 shimmer mb-3" />
-            <div className="h-4 w-72 rounded-full bg-neutral-100 shimmer mb-6" />
-            <div className="h-24 w-full rounded-2xl bg-neutral-100 shimmer" />
-          </div>
-        </Container>
-      </section>
-    )
   }
 
   return (

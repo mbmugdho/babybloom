@@ -38,7 +38,7 @@ export default function ShopByAgeSection() {
                 Shop by age or need
               </p>
               <h2 className="font-poppins text-lg sm:text-xl md:text-2xl font-semibold text-neutral-600 ">
-                Find what fits your baby's chapter
+                Find what fits your baby&apos;s chapter
               </h2>
               <p className="text-xs sm:text-sm text-neutral-400">
                 Browse gentle essentials tailored for specific age ranges and

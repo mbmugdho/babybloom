@@ -15,46 +15,38 @@ export async function GET(request) {
     const { searchParams } = new URL(request.url)
     const secret = searchParams.get('secret')
 
-    // Optional: Add a secret key for protection
-    // if (secret !== process.env.SEED_SECRET) {
-    //   return NextResponse.json(
-    //     { success: false, message: "Unauthorized" },
-    //     { status: 401 }
-    //   );
-    // }
-
     await connectDB()
 
-    console.log('🌱 Starting database seeding...')
+    console.log(' Starting database seeding...')
 
     // ═══════════════════════════════════════════════════════════════
     // SEED CATEGORIES
     // ═══════════════════════════════════════════════════════════════
-    console.log('📂 Seeding categories...')
+    console.log(' Seeding categories...')
 
     // Clear existing categories
     await Category.deleteMany({})
 
     // Insert categories
     const insertedCategories = await Category.insertMany(categories)
-    console.log(`✅ Inserted ${insertedCategories.length} categories`)
+    console.log(` Inserted ${insertedCategories.length} categories`)
 
     // ═══════════════════════════════════════════════════════════════
     // SEED PRODUCTS
     // ═══════════════════════════════════════════════════════════════
-    console.log('📦 Seeding products...')
+    console.log(' Seeding products...')
 
     // Clear existing products
     await Product.deleteMany({})
 
     // Insert products
     const insertedProducts = await Product.insertMany(products)
-    console.log(`✅ Inserted ${insertedProducts.length} products`)
+    console.log(` Inserted ${insertedProducts.length} products`)
 
     // ═══════════════════════════════════════════════════════════════
     // SEED ADMIN USER
     // ═══════════════════════════════════════════════════════════════
-    console.log('👤 Seeding admin user...')
+    console.log(' Seeding admin user...')
 
     // Clear existing users
     await User.deleteMany({})
@@ -67,12 +59,12 @@ export async function GET(request) {
       role: 'admin',
       isActive: true,
     })
-    console.log(`✅ Created admin user: ${adminUser.email}`)
+    console.log(` Created admin user: ${adminUser.email}`)
 
     // ═══════════════════════════════════════════════════════════════
     // UPDATE CATEGORY PRODUCT COUNTS
     // ═══════════════════════════════════════════════════════════════
-    console.log('📊 Updating category product counts...')
+    console.log(' Updating category product counts...')
 
     for (const category of insertedCategories) {
       const count = await Product.countDocuments({
@@ -80,9 +72,9 @@ export async function GET(request) {
       })
       await Category.findByIdAndUpdate(category._id, { productCount: count })
     }
-    console.log('✅ Updated product counts')
+    console.log(' Updated product counts')
 
-    console.log('🎉 Database seeding completed!')
+    console.log(' Database seeding completed!')
 
     return NextResponse.json({
       success: true,
@@ -97,7 +89,7 @@ export async function GET(request) {
       },
     })
   } catch (error) {
-    console.error('❌ Seeding error:', error)
+    console.error(' Seeding error:', error)
     return NextResponse.json(
       {
         success: false,
